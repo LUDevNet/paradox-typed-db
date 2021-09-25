@@ -1,0 +1,16 @@
+[package]
+name = "paradox-typed-db"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies.assembly-core]
+version = "0.2.1"
+
+[dependencies.assembly-data]
+version = "0.3.0"
+default-features = false
+features = ["serde-derives"]
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]
