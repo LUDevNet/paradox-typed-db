@@ -52,6 +52,12 @@ make_typed!(BehaviorTemplateTable {
     col_effect_handle b"effectHandle",
 });
 
+make_typed!(ComponentsRegistryTable {
+    col_id b"id",
+    col_component_type b"component_type",
+    col_component_id b"component_id",
+});
+
 make_typed!(IconsTable {
     col_icon_path b"IconPath",
     col_icon_name b"IconName",
@@ -114,6 +120,23 @@ impl<'a> MissionTasksTable<'a> {
         })
     }
 }
+
+make_typed!(ObjectsTable {
+    col_id b"id",
+    col_name b"name",
+    col_placeable b"placeable",
+    col_type b"type",
+    col_description b"description",
+    col_localize b"localize",
+    col_npc_template_id b"npcTemplateID",
+    col_display_name b"displayName",
+    col_interaction_distance b"interactionDistance",
+    col_nametag b"nametag",
+    col_internal_notes b"_internalNotes",
+    col_loc_status b"locStatus",
+    col_gate_version b"gate_version",
+    col_hq_valid b"HQ_valid",
+});
 
 make_typed!(ObjectSkillsTable {
     col_object_template b"objectTemplate",

@@ -1,6 +1,7 @@
 use super::typed_tables::{
-    BehaviorParameterTable, BehaviorTemplateTable, ItemSetSkillsTable, MissionTasksTable,
-    MissionsTable, ObjectSkillsTable, SkillBehaviorTable, TypedTable,
+    BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable, ItemSetSkillsTable,
+    MissionTasksTable, MissionsTable, ObjectSkillsTable, ObjectsTable, SkillBehaviorTable,
+    TypedTable,
 };
 use assembly_data::fdb::{
     common::{Latin1Str, Latin1String},
@@ -49,6 +50,13 @@ impl<'a> sealed::Extract<'a> for f32 {
     type V = f32;
     fn from_field(f: Field<'a>) -> Self::V {
         f.into_opt_float().unwrap()
+    }
+}
+
+impl<'a> sealed::Extract<'a> for Option<f32> {
+    type V = Option<f32>;
+    fn from_field(f: Field<'a>) -> Self::V {
+        f.into_opt_float()
     }
 }
 
@@ -188,6 +196,16 @@ ser_impl!(BehaviorTemplateRow "BehaviorTemplate" {
     effect_handle: Option<Latin1String>,
 });
 
+row_type!(ComponentsRegistryRow ComponentsRegistryTable);
+ser_impl!(ComponentsRegistryRow "ComponentsRegistry" {
+    #[name = "id", col = col_id]
+    id: i32,
+    #[name = "component_type", col = col_component_type]
+    component_type: i32,
+    #[name = "component_id", col = col_component_id]
+    component_id: i32,
+});
+
 row_type!(MissionsRow MissionsTable);
 ser_impl!(MissionsRow "Mission" {
     #[name = "id", col = col_id]
@@ -232,6 +250,38 @@ ser_impl!(MissionTaskRow "MissionTask" {
     localize: bool,
     #[name = "gate_version", col = col_gate_version]
     gate_version: Option<Latin1String>,
+});
+
+row_type!(ObjectsRow ObjectsTable);
+ser_impl!(ObjectsRow "Object" {
+    #[name = "id", col=col_id]
+    id: i32, // 	INTEGER
+    #[name = "name", col=col_name]
+    name: Latin1String, // 	TEXT
+    #[name = "placeable", col=col_placeable]
+    placeable: bool, // 	BOOLEAN
+    #[name = "type", col=col_type]
+    r#type: Latin1String, // 	TEXT
+    #[name = "description", col=col_description]
+    description: Option<Latin1String>, // 	TEXT
+    #[name = "localize", col=col_localize]
+    localize: bool, // 	BOOLEAN
+    #[name = "npcTemplateID", col=col_npc_template_id]
+    npc_template_id: Option<i32>, // 	INTEGER
+    #[name = "displayName", col=col_display_name]
+    display_name: Option<Latin1String>, // 	TEXT
+    #[name = "interactionDistance", col=col_interaction_distance]
+    interaction_distance: Option<f32>, // 	FLOAT
+    #[name = "nametag", col=col_nametag]
+    nametag: bool, // 	BOOLEAN
+    #[name = "_internalNotes", col=col_internal_notes]
+    internal_notes: Option<Latin1String>, // 	TEXT
+    #[name = "locStatus", col=col_loc_status]
+    loc_status: i32, // 	INTEGER
+    #[name = "gate_version", col=col_gate_version]
+    gate_version: Option<Latin1String>, // 	TEXT
+    #[name = "HQ_valid", col=col_hq_valid]
+    hq_valid: bool, // 	BOOLEAN
 });
 
 row_type!(ObjectSkillsRow ObjectSkillsTable);

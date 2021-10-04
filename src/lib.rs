@@ -16,8 +16,9 @@ pub mod typed_rows;
 pub mod typed_tables;
 
 use typed_tables::{
-    BehaviorParameterTable, BehaviorTemplateTable, IconsTable, ItemSetSkillsTable, ItemSetsTable,
-    MissionTasksTable, MissionsTable, ObjectSkillsTable, SkillBehaviorTable, TypedTable,
+    BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable, IconsTable,
+    ItemSetSkillsTable, ItemSetsTable, MissionTasksTable, MissionsTable, ObjectSkillsTable,
+    ObjectsTable, SkillBehaviorTable, TypedTable,
 };
 
 use self::typed_ext::{Components, Mission, MissionKind, MissionTask};
@@ -32,7 +33,7 @@ pub struct TypedDatabase<'db> {
     /// BehaviorTemplate
     pub behavior_templates: BehaviorTemplateTable<'db>,
     /// ComponentRegistry
-    pub comp_reg: Table<'db>,
+    pub comp_reg: ComponentsRegistryTable<'db>,
     /// Icons
     pub icons: IconsTable<'db>,
     /// ItemSets
@@ -44,7 +45,7 @@ pub struct TypedDatabase<'db> {
     /// MissionTasks
     pub mission_tasks: MissionTasksTable<'db>,
     /// Objects
-    pub objects: Table<'db>,
+    pub objects: ObjectsTable<'db>,
     /// Objects
     pub object_skills: ObjectSkillsTable<'db>,
     /// RenderComponent
@@ -88,7 +89,9 @@ impl<'a> TypedDatabase<'a> {
             behavior_templates: BehaviorTemplateTable::new(
                 tables.by_name("BehaviorTemplate").unwrap().unwrap(),
             ),
-            comp_reg: tables.by_name("ComponentsRegistry").unwrap().unwrap(),
+            comp_reg: ComponentsRegistryTable::new(
+                tables.by_name("ComponentsRegistry").unwrap().unwrap(),
+            ),
             icons: IconsTable::new(tables.by_name("Icons").unwrap().unwrap()),
             item_sets: ItemSetsTable::new(tables.by_name("ItemSets").unwrap().unwrap()),
             item_set_skills: ItemSetSkillsTable::new(
@@ -96,7 +99,7 @@ impl<'a> TypedDatabase<'a> {
             ),
             missions: MissionsTable::new(tables.by_name("Missions").unwrap().unwrap()),
             mission_tasks: MissionTasksTable::new(tables.by_name("MissionTasks").unwrap().unwrap()),
-            objects: tables.by_name("Objects").unwrap().unwrap(),
+            objects: ObjectsTable::new(tables.by_name("Objects").unwrap().unwrap()),
             object_skills: ObjectSkillsTable::new(tables.by_name("ObjectSkills").unwrap().unwrap()),
             render_comp: tables.by_name("RenderComponent").unwrap().unwrap(),
             skills: SkillBehaviorTable::new(tables.by_name("SkillBehavior").unwrap().unwrap()),
@@ -226,9 +229,10 @@ impl<'a> TypedDatabase<'a> {
 
     pub fn get_object_name_desc(&self, id: i32) -> Option<(String, String)> {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let bucket = self
-            .objects
-            .bucket_at(hash as usize % self.objects.bucket_count())
+
+        let table = self.objects.as_table();
+        let bucket = table
+            .bucket_at(hash as usize % table.bucket_count())
             .unwrap();
 
         for row in bucket.row_iter() {
@@ -307,9 +311,9 @@ impl<'a> TypedDatabase<'a> {
 
     pub fn get_components(&self, id: i32) -> Components {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let bucket = self
-            .comp_reg
-            .bucket_at(hash as usize % self.comp_reg.bucket_count())
+        let table = self.comp_reg.as_table();
+        let bucket = table
+            .bucket_at(hash as usize % table.bucket_count())
             .unwrap();
 
         let mut comp = Components::default();
