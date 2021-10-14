@@ -97,7 +97,7 @@ macro_rules! extract {
 }
 
 macro_rules! row_type {
-    ($row:ident $table:ident) => {
+    ($row:ident $table:ident $row_iter_name:ident $key_iter_name:ident) => {
         #[derive(Copy, Clone)]
         pub struct $row<'a, 'b> {
             inner: Row<'a>,
@@ -113,7 +113,7 @@ macro_rules! row_type {
 
         impl<'a> $table<'a> {
             #[allow(dead_code)]
-            pub fn row_iter<'b: 'a>(&'b self) -> impl Iterator<Item = $row<'a, 'b>> {
+            pub fn $row_iter_name<'b: 'a>(&'b self) -> impl Iterator<Item = $row<'a, 'b>> {
                 self.as_table()
                     .row_iter()
                     .map(move |inner| $row::new(inner, self))
@@ -122,7 +122,7 @@ macro_rules! row_type {
 
         impl<'a> $table<'a> {
             #[allow(dead_code)]
-            pub fn key_iter<'b: 'a>(&'b self, key: i32) -> impl Iterator<Item = $row<'a, 'b>> {
+            pub fn $key_iter_name<'b: 'a>(&'b self, key: i32) -> impl Iterator<Item = $row<'a, 'b>> {
                 let hash = key as usize % self.as_table().bucket_count();
                 self.as_table()
                     .bucket_at(hash)
@@ -132,6 +132,9 @@ macro_rules! row_type {
             }
         }
     };
+    ($row:ident $table:ident) => {
+        row_type!($row $table row_iter key_iter);
+    }
 }
 
 macro_rules! count {
@@ -250,6 +253,14 @@ ser_impl!(MissionTaskRow "MissionTask" {
     localize: bool,
     #[name = "gate_version", col = col_gate_version]
     gate_version: Option<Latin1String>,
+});
+
+row_type!(ObjectsRef ObjectsTable ref_iter ref_key_iter);
+ser_impl!(ObjectsRef "ObjectRef" {
+    #[name = "id", col=col_id]
+    id: i32, // 	INTEGER
+    #[name = "name", col=col_name]
+    name: Latin1String, // 	TEXT
 });
 
 row_type!(ObjectsRow ObjectsTable);
