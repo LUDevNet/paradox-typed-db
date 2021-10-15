@@ -257,8 +257,8 @@ ser_impl!(MissionTaskRow "MissionTask" {
 
 row_type!(ObjectsRef ObjectsTable ref_iter ref_key_iter);
 ser_impl!(ObjectsRef "ObjectRef" {
-    #[name = "id", col=col_id]
-    id: i32, // 	INTEGER
+    // #[name = "id", col=col_id]
+    // id: i32, // 	INTEGER
     #[name = "name", col=col_name]
     name: Latin1String, // 	TEXT
 });
