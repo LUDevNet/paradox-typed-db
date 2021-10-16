@@ -3,10 +3,11 @@ use std::{
     sync::Arc,
 };
 
+use assembly_core::buffer::CastError;
 use assembly_data::{
     fdb::{
         common::{Latin1Str, Value},
-        mem::{Table, Tables},
+        mem::Tables,
     },
     xml::localization::LocaleNode,
 };
@@ -18,7 +19,7 @@ pub mod typed_tables;
 use typed_tables::{
     BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable, IconsTable,
     ItemSetSkillsTable, ItemSetsTable, MissionTasksTable, MissionsTable, ObjectSkillsTable,
-    ObjectsTable, SkillBehaviorTable, TypedTable,
+    ObjectsTable, RebuildComponentTable, RenderComponentTable, SkillBehaviorTable, TypedTable,
 };
 
 use self::typed_ext::{Components, Mission, MissionKind, MissionTask};
@@ -48,8 +49,10 @@ pub struct TypedDatabase<'db> {
     pub objects: ObjectsTable<'db>,
     /// Objects
     pub object_skills: ObjectSkillsTable<'db>,
+    /// RebuildComponent
+    pub rebuild_component: RebuildComponentTable<'db>,
     /// RenderComponent
-    pub render_comp: Table<'db>,
+    pub render_comp: RenderComponentTable<'db>,
     /// SkillBehavior
     pub skills: SkillBehaviorTable<'db>,
 }
@@ -79,31 +82,41 @@ fn cleanup_path(url: &Latin1Str) -> Option<PathBuf> {
 }
 
 impl<'a> TypedDatabase<'a> {
-    pub fn new(locale: Arc<LocaleNode>, lu_res_prefix: &'a str, tables: Tables<'a>) -> Self {
-        TypedDatabase {
+    pub fn new(
+        locale: Arc<LocaleNode>,
+        lu_res_prefix: &'a str,
+        tables: Tables<'a>,
+    ) -> Result<Self, CastError> {
+        let behavior_parameter_inner = tables.by_name("BehaviorParameter").unwrap()?;
+        let behavior_template_inner = tables.by_name("BehaviorTemplate").unwrap()?;
+        let components_registry_inner = tables.by_name("ComponentsRegistry").unwrap()?;
+        let icons_inner = tables.by_name("Icons").unwrap()?;
+        let item_sets_inner = tables.by_name("ItemSets").unwrap()?;
+        let item_set_skills_inner = tables.by_name("ItemSetSkills").unwrap()?;
+        let missions_inner = tables.by_name("Missions").unwrap()?;
+        let mission_tasks_inner = tables.by_name("MissionTasks").unwrap()?;
+        let objects_inner = tables.by_name("Objects").unwrap()?;
+        let object_skills_inner = tables.by_name("ObjectSkills").unwrap()?;
+        let rebuild_component_inner = tables.by_name("RebuildComponent").unwrap()?;
+        let render_component_inner = tables.by_name("RenderComponent").unwrap()?;
+        let skill_behavior_inner = tables.by_name("SkillBehavior").unwrap()?;
+        Ok(TypedDatabase {
             locale,
             lu_res_prefix,
-            behavior_parameters: BehaviorParameterTable::new(
-                tables.by_name("BehaviorParameter").unwrap().unwrap(),
-            ),
-            behavior_templates: BehaviorTemplateTable::new(
-                tables.by_name("BehaviorTemplate").unwrap().unwrap(),
-            ),
-            comp_reg: ComponentsRegistryTable::new(
-                tables.by_name("ComponentsRegistry").unwrap().unwrap(),
-            ),
-            icons: IconsTable::new(tables.by_name("Icons").unwrap().unwrap()),
-            item_sets: ItemSetsTable::new(tables.by_name("ItemSets").unwrap().unwrap()),
-            item_set_skills: ItemSetSkillsTable::new(
-                tables.by_name("ItemSetSkills").unwrap().unwrap(),
-            ),
-            missions: MissionsTable::new(tables.by_name("Missions").unwrap().unwrap()),
-            mission_tasks: MissionTasksTable::new(tables.by_name("MissionTasks").unwrap().unwrap()),
-            objects: ObjectsTable::new(tables.by_name("Objects").unwrap().unwrap()),
-            object_skills: ObjectSkillsTable::new(tables.by_name("ObjectSkills").unwrap().unwrap()),
-            render_comp: tables.by_name("RenderComponent").unwrap().unwrap(),
-            skills: SkillBehaviorTable::new(tables.by_name("SkillBehavior").unwrap().unwrap()),
-        }
+            behavior_parameters: BehaviorParameterTable::new(behavior_parameter_inner),
+            behavior_templates: BehaviorTemplateTable::new(behavior_template_inner),
+            comp_reg: ComponentsRegistryTable::new(components_registry_inner),
+            icons: IconsTable::new(icons_inner),
+            item_sets: ItemSetsTable::new(item_sets_inner),
+            item_set_skills: ItemSetSkillsTable::new(item_set_skills_inner),
+            missions: MissionsTable::new(missions_inner),
+            mission_tasks: MissionTasksTable::new(mission_tasks_inner),
+            objects: ObjectsTable::new(objects_inner),
+            object_skills: ObjectSkillsTable::new(object_skills_inner),
+            rebuild_component: RebuildComponentTable::new(rebuild_component_inner),
+            render_comp: RenderComponentTable::new(render_component_inner),
+            skills: SkillBehaviorTable::new(skill_behavior_inner),
+        })
     }
 
     pub fn get_mission_name(&self, kind: MissionKind, id: i32) -> Option<String> {
@@ -284,9 +297,9 @@ impl<'a> TypedDatabase<'a> {
 
     pub fn get_render_image(&self, id: i32) -> Option<String> {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let bucket = self
-            .render_comp
-            .bucket_at(hash as usize % self.render_comp.bucket_count())
+        let table = self.render_comp.as_table();
+        let bucket = table
+            .bucket_at(hash as usize % table.bucket_count())
             .unwrap();
 
         for row in bucket.row_iter() {

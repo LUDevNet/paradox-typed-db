@@ -188,6 +188,37 @@ make_typed!(RebuildComponentTable {
     col_time_before_smash b"time_before_smash", // 	FLOAT
 });
 
+make_typed!(RenderComponentTable {
+    col_id b"id", // INTEGER
+    col_render_asset b"render_asset", // TEXT
+    col_icon_asset b"icon_asset", // TEXT
+    col_icon_id b"IconID", // INTEGER
+    col_shader_id b"shader_id", // INTEGER
+    col_effect1 b"effect1", // INTEGER
+    col_effect2 b"effect2", // INTEGER
+    col_effect3 b"effect3", // INTEGER
+    col_effect4 b"effect4", // INTEGER
+    col_effect5 b"effect5", // INTEGER
+    col_effect6 b"effect6", // INTEGER
+    col_animation_group_ids b"animationGroupIDs", // TEXT
+    col_fade b"fade", // BOOLEAN
+    col_usedropshadow b"usedropshadow", // BOOLEAN
+    col_preload_animations b"preloadAnimations", // BOOLEAN
+    col_fade_in_time b"fadeInTime", // FLOAT
+    col_max_shadow_distance b"maxShadowDistance", // FLOAT
+    col_ignore_camera_collision b"ignoreCameraCollision", // BOOLEAN
+    col_render_component_lod1 b"renderComponentLOD1", // INTEGER
+    col_render_component_lod2 b"renderComponentLOD2", // INTEGER
+    col_gradual_snap b"gradualSnap", // BOOLEAN
+    col_animation_flag b"animationFlag", // INTEGER
+    col_audio_meta_event_set b"AudioMetaEventSet", // TEXT
+    col_billboard_height b"billboardHeight", // FLOAT
+    col_chat_bubble_offset b"chatBubbleOffset", // FLOAT
+    col_static_billboard b"staticBillboard", // BOOLEAN
+    col_lxfml_folder b"LXFMLFolder", // TEXT
+    col_attach_indicators_to_node b"attachIndicatorsToNode", // BOOLEAN
+});
+
 make_typed!(SkillBehaviorTable {
     col_skill_id b"skillID",
     col_loc_status b"locStatus",
