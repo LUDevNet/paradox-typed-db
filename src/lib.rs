@@ -18,9 +18,9 @@ pub mod typed_tables;
 
 use typed_tables::{
     BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable,
-    DestructibleComponentTable, IconsTable, ItemSetSkillsTable, ItemSetsTable, MissionTasksTable,
-    MissionsTable, ObjectSkillsTable, ObjectsTable, RebuildComponentTable, RenderComponentTable,
-    SkillBehaviorTable, TypedTable,
+    DestructibleComponentTable, IconsTable, ItemSetSkillsTable, ItemSetsTable, LootTable,
+    MissionTasksTable, MissionsTable, ObjectSkillsTable, ObjectsTable, RebuildComponentTable,
+    RenderComponentTable, SkillBehaviorTable, TypedTable,
 };
 
 use self::typed_ext::{Components, Mission, MissionKind, MissionTask};
@@ -44,6 +44,8 @@ pub struct TypedDatabase<'db> {
     pub item_sets: ItemSetsTable<'db>,
     /// ItemSetSkills
     pub item_set_skills: ItemSetSkillsTable<'db>,
+    /// LootTable
+    pub loot_table: LootTable<'db>,
     /// Missions
     pub missions: MissionsTable<'db>,
     /// MissionTasks
@@ -97,6 +99,7 @@ impl<'a> TypedDatabase<'a> {
         let icons_inner = tables.by_name("Icons").unwrap()?;
         let item_sets_inner = tables.by_name("ItemSets").unwrap()?;
         let item_set_skills_inner = tables.by_name("ItemSetSkills").unwrap()?;
+        let loot_table_inner = tables.by_name("LootTable").unwrap()?;
         let missions_inner = tables.by_name("Missions").unwrap()?;
         let mission_tasks_inner = tables.by_name("MissionTasks").unwrap()?;
         let objects_inner = tables.by_name("Objects").unwrap()?;
@@ -114,6 +117,7 @@ impl<'a> TypedDatabase<'a> {
             icons: IconsTable::new(icons_inner),
             item_sets: ItemSetsTable::new(item_sets_inner),
             item_set_skills: ItemSetSkillsTable::new(item_set_skills_inner),
+            loot_table: LootTable::new(loot_table_inner),
             missions: MissionsTable::new(missions_inner),
             mission_tasks: MissionTasksTable::new(mission_tasks_inner),
             objects: ObjectsTable::new(objects_inner),
