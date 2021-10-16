@@ -17,9 +17,10 @@ pub mod typed_rows;
 pub mod typed_tables;
 
 use typed_tables::{
-    BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable, IconsTable,
-    ItemSetSkillsTable, ItemSetsTable, MissionTasksTable, MissionsTable, ObjectSkillsTable,
-    ObjectsTable, RebuildComponentTable, RenderComponentTable, SkillBehaviorTable, TypedTable,
+    BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable,
+    DestructibleComponentTable, IconsTable, ItemSetSkillsTable, ItemSetsTable, MissionTasksTable,
+    MissionsTable, ObjectSkillsTable, ObjectsTable, RebuildComponentTable, RenderComponentTable,
+    SkillBehaviorTable, TypedTable,
 };
 
 use self::typed_ext::{Components, Mission, MissionKind, MissionTask};
@@ -35,6 +36,8 @@ pub struct TypedDatabase<'db> {
     pub behavior_templates: BehaviorTemplateTable<'db>,
     /// ComponentRegistry
     pub comp_reg: ComponentsRegistryTable<'db>,
+    /// DestructibleComponent
+    pub destructible_component: DestructibleComponentTable<'db>,
     /// Icons
     pub icons: IconsTable<'db>,
     /// ItemSets
@@ -90,6 +93,7 @@ impl<'a> TypedDatabase<'a> {
         let behavior_parameter_inner = tables.by_name("BehaviorParameter").unwrap()?;
         let behavior_template_inner = tables.by_name("BehaviorTemplate").unwrap()?;
         let components_registry_inner = tables.by_name("ComponentsRegistry").unwrap()?;
+        let destructible_component_inner = tables.by_name("DestructibleComponent").unwrap()?;
         let icons_inner = tables.by_name("Icons").unwrap()?;
         let item_sets_inner = tables.by_name("ItemSets").unwrap()?;
         let item_set_skills_inner = tables.by_name("ItemSetSkills").unwrap()?;
@@ -106,6 +110,7 @@ impl<'a> TypedDatabase<'a> {
             behavior_parameters: BehaviorParameterTable::new(behavior_parameter_inner),
             behavior_templates: BehaviorTemplateTable::new(behavior_template_inner),
             comp_reg: ComponentsRegistryTable::new(components_registry_inner),
+            destructible_component: DestructibleComponentTable::new(destructible_component_inner),
             icons: IconsTable::new(icons_inner),
             item_sets: ItemSetsTable::new(item_sets_inner),
             item_set_skills: ItemSetSkillsTable::new(item_set_skills_inner),
