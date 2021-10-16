@@ -1,7 +1,7 @@
 use super::typed_tables::{
-    BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable, ItemSetSkillsTable,
-    MissionTasksTable, MissionsTable, ObjectSkillsTable, ObjectsTable, SkillBehaviorTable,
-    TypedTable,
+    BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable,
+    DestructibleComponentTable, ItemSetSkillsTable, LootTable, MissionTasksTable, MissionsTable,
+    ObjectSkillsTable, ObjectsTable, RebuildComponentTable, SkillBehaviorTable, TypedTable,
 };
 use assembly_data::fdb::{
     common::{Latin1Str, Latin1String},
@@ -71,6 +71,13 @@ impl<'a> sealed::Extract<'a> for bool {
     type V = bool;
     fn from_field(f: Field<'a>) -> Self::V {
         f.into_opt_boolean().unwrap()
+    }
+}
+
+impl<'a> sealed::Extract<'a> for Option<bool> {
+    type V = Option<bool>;
+    fn from_field(f: Field<'a>) -> Self::V {
+        f.into_opt_boolean()
     }
 }
 
@@ -209,6 +216,52 @@ ser_impl!(ComponentsRegistryRow "ComponentsRegistry" {
     component_id: i32,
 });
 
+row_type!(DestructibleComponentRow DestructibleComponentTable);
+ser_impl!(DestructibleComponentRow "DestructibleComponent" {
+    #[name = "id", col = col_id]
+    id: i32,
+    #[name = "faction", col = col_faction]
+    faction: Option<i32>,
+    #[name = "factionList", col = col_faction_list]
+    faction_list: Latin1String,
+    #[name = "life", col = col_life]
+    life: Option<i32>, // only one NULL
+    #[name = "imagination", col = col_imagination]
+    imagination: i32,
+    #[name = "LootMatrixIndex", col = col_loot_matrix_index]
+    loot_matrix_index: Option<i32>,
+    #[name = "CurrencyIndex", col = col_currency_index]
+    currency_index: Option<i32>,
+    #[name = "level", col = col_level]
+    level: Option<i32>,
+    #[name = "armor", col = col_armor]
+    armor: Option<f32>,
+    #[name = "death_behavior", col = col_death_behavior]
+    death_behavior: i32, // ENUM
+    #[name = "isnpc", col = col_isnpc]
+    isnpc: Option<bool>,
+    #[name = "attack_priority", col = col_attack_priority]
+    attack_priority: i32,
+    #[name = "isSmashable", col = col_is_smashable]
+    is_smashable: bool,
+    #[name = "difficultyLevel", col = col_difficulty_level]
+    difficulty_level: Option<i32>,
+});
+
+row_type!(LootTableRow LootTable);
+ser_impl!(LootTableRow "LootTable" {
+    #[name = "itemid", col = col_itemid]
+    itemid: i32,
+    #[name = "LootTableIndex", col = col_loot_table_index]
+    loot_table_index: i32,
+    #[name = "id", col = col_id]
+    id: i32,
+    #[name = "MissionDrop", col = col_mission_drop]
+    mission_drop: bool,
+    #[name = "sortPriority", col = col_sort_priority]
+    sort_priority: i32,
+});
+
 row_type!(MissionsRow MissionsTable);
 ser_impl!(MissionsRow "Mission" {
     #[name = "id", col = col_id]
@@ -309,6 +362,30 @@ impl<'a> ItemSetSkillsRow<'a, '_> {
     extract!(skill_id col_skill_id i32);
     //extract!(skill_cast_type col_skill_cast_type i32);
 }
+
+row_type!(RebuildComponentRow RebuildComponentTable);
+ser_impl!(RebuildComponentRow "RebuildComponent" {
+    #[name = "id", col = col_id]
+    id: i32, //
+    #[name = "reset_time", col = col_reset_time]
+    reset_time: f32, //
+    #[name = "complete_time", col = col_complete_time]
+    complete_time: Option<f32>, //
+    #[name = "take_imagination", col = col_take_imagination]
+    take_imagination: i32, //
+    #[name = "interruptible", col = col_interruptible]
+    interruptible: bool, //
+    #[name = "self_activator", col = col_self_activator]
+    self_activator: bool, //
+    #[name = "custom_modules", col = col_custom_modules]
+    custom_modules: Option<Latin1String>, //
+    #[name = "activityID", col = col_activity_id]
+    activity_id: Option<i32>, //
+    #[name = "post_imagination_cost", col = col_post_imagination_cost]
+    post_imagination_cost: Option<i32>, //
+    #[name = "time_before_smash", col = col_time_before_smash]
+    time_before_smash: f32, //
+});
 
 row_type!(SkillBehaviorRow SkillBehaviorTable);
 ser_impl!(SkillBehaviorRow "SkillBehavior" {

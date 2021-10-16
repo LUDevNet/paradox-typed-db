@@ -58,6 +58,23 @@ make_typed!(ComponentsRegistryTable {
     col_component_id b"component_id",
 });
 
+make_typed!(DestructibleComponentTable {
+    col_id b"id", // INTEGER
+    col_faction b"faction", // INTEGER
+    col_faction_list b"factionList", // TEXT
+    col_life b"life", // INTEGER
+    col_imagination b"imagination", // INTEGER
+    col_loot_matrix_index b"LootMatrixIndex", // INTEGER
+    col_currency_index b"CurrencyIndex", // INTEGER
+    col_level b"level", // INTEGER
+    col_armor b"armor", // FLOAT
+    col_death_behavior b"death_behavior", // INTEGER
+    col_isnpc b"isnpc", // BOOLEAN
+    col_attack_priority b"attack_priority", // INTEGER
+    col_is_smashable b"isSmashable", // BOOLEAN
+    col_difficulty_level b"difficultyLevel", // INTEGER
+});
+
 make_typed!(IconsTable {
     col_icon_path b"IconPath",
     col_icon_name b"IconName",
@@ -78,6 +95,19 @@ make_typed!(ItemSetsTable {
     col_kit_rank b"kitRank",
     /// kitImage
     col_kit_image b"kitImage",
+});
+
+make_typed!(LootTable {
+    /// itemid
+    col_itemid b"itemid",
+    /// LootTableIndex
+    col_loot_table_index b"LootTableIndex",
+    /// id
+    col_id b"id",
+    /// MissionDrop
+    col_mission_drop b"MissionDrop",
+    /// sortPriority
+    col_sort_priority b"sortPriority",
 });
 
 make_typed!(MissionsTable {
@@ -143,6 +173,19 @@ make_typed!(ObjectSkillsTable {
     col_skill_id b"skillID",
     col_cast_on_type b"castOnType",
     col_ai_combat_weight b"AICombatWeight",
+});
+
+make_typed!(RebuildComponentTable {
+    col_id b"id", // 	INTEGER
+    col_reset_time b"reset_time", // 	FLOAT
+    col_complete_time b"complete_time", // 	FLOAT
+    col_take_imagination b"take_imagination", // 	INTEGER
+    col_interruptible b"interruptible", // 	BOOLEAN
+    col_self_activator b"self_activator", // 	BOOLEAN
+    col_custom_modules b"custom_modules", // 	TEXT
+    col_activity_id b"activityID", // 	INTEGER
+    col_post_imagination_cost b"post_imagination_cost", // 	INTEGER
+    col_time_before_smash b"time_before_smash", // 	FLOAT
 });
 
 make_typed!(SkillBehaviorTable {
