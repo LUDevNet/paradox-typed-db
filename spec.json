@@ -1,0 +1,7002 @@
+{
+  "tables": {
+    "AICombatRoles": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "preferredRole",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "specifiedMinRangeNOUSE",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "specifiedMaxRangeNOUSE",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "specificMinRange",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "specificMaxRange",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "AccessoryDefaultLoc": {
+      "columns": [
+        {
+          "name": "GroupID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "Description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "Pos_X",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "Pos_Y",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "Pos_Z",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "Rot_X",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "Rot_Y",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "Rot_Z",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "Activities": {
+      "columns": [
+        {
+          "name": "ActivityID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "instanceMapID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "minTeams",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "maxTeams",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "minTeamSize",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "maxTeamSize",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "waitTime",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "startDelay",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "requiresUniqueData",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "leaderboardType",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "optionalCostLOT",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "optionalCostCount",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "showUIRewards",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "CommunityActivityFlagID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "noTeamLootOnDeath",
+          "ty": "Boolean",
+          "nullable": true
+        },
+        {
+          "name": "optionalPercentage",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "ActivityRewards": {
+      "columns": [
+        {
+          "name": "objectTemplate",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "ActivityRewardIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "activityRating",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LootMatrixIndex",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "CurrencyIndex",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "ChallengeRating",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "ActivityText": {
+      "columns": [
+        {
+          "name": "activityID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "AnimationIndex": {
+      "columns": [
+        {
+          "name": "animationGroupID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "groupType",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "Animations": {
+      "columns": [
+        {
+          "name": "animationGroupID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "animation_type",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "animation_name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "chance_to_play",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "min_loops",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "max_loops",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "animation_length",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "hideEquip",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "ignoreUpperBody",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "restartable",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "face_animation_name",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "priority",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "blendTime",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "BaseCombatAIComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "behaviorType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "combatRoundLength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "combatRole",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minRoundLength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxRoundLength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "tetherSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "pursuitSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "combatStartDelay",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "softTetherRadius",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "hardTetherRadius",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "spawnTimer",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "tetherEffectID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "ignoreMediator",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "aggroRadius",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "ignoreStatReset",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "ignoreParent",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "BehaviorEffect": {
+      "columns": [
+        {
+          "name": "effectID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "effectType",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "effectName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "trailID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "pcreateDuration",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "animationName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "attachToObject",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "boneName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "useSecondary",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "cameraEffectType",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "cameraDuration",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraFrequency",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraXAmp",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraYAmp",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraZAmp",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraRotFrequency",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraRoll",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraPitch",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "cameraYaw",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "renderEffectType",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "renderEffectTime",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "renderStartVal",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "renderEndVal",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "renderDelayVal",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "renderValue1",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "renderValue2",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "renderValue3",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "renderRGBA",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "renderShaderVal",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "motionID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "meshID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "meshDuration",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "meshLockedNode",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "BehaviorParameter": {
+      "columns": [
+        {
+          "name": "behaviorID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "parameterID",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "BehaviorTemplate": {
+      "columns": [
+        {
+          "name": "behaviorID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "templateID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "effectID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "effectHandle",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "BehaviorTemplateName": {
+      "columns": [
+        {
+          "name": "templateID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "Blueprints": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "accountid",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "characterid",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "price",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "rating",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "categoryid",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "lxfpath",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "deleted",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "created",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "modified",
+          "ty": "BigInt",
+          "nullable": false
+        }
+      ]
+    },
+    "BrickColors": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "red",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "green",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "blue",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "alpha",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "legopaletteid",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "validTypes",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "validCharacters",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "factoryValid",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "BrickIDTable": {
+      "columns": [
+        {
+          "name": "NDObjectID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LEGOBrickID",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "BuffDefinitions": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "Priority",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "UIIcon",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "BuffParameters": {
+      "columns": [
+        {
+          "name": "BuffID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "ParameterName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "NumberValue",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "StringValue",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "EffectID",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "Camera": {
+      "columns": [
+        {
+          "name": "camera_name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "pitch_angle_tolerance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "starting_zoom",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "zoom_return_modifier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "pitch_return_modifier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "tether_out_return_modifier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "tether_in_return_multiplier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "verticle_movement_dampening_modifier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "return_from_incline_modifier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "horizontal_return_modifier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "yaw_behavior_speed_multiplier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "camera_collision_padding",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "glide_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fade_player_min_range",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "min_movement_delta_tolerance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "min_glide_distance_tolerance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "look_forward_offset",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "look_up_offset",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "minimum_vertical_dampening_distance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maximum_vertical_dampening_distance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "minimum_ignore_jump_distance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maximum_ignore_jump_distance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maximum_auto_glide_angle",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "minimum_tether_glide_distance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "yaw_sign_correction",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "set_1_look_forward_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_look_up_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_look_forward_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_look_up_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_0_speed_influence_on_dir",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_speed_influence_on_dir",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_speed_influence_on_dir",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_0_angular_relaxation",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_angular_relaxation",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_angular_relaxation",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_0_position_up_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_position_up_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_position_up_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_0_position_forward_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_position_forward_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_position_forward_offset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_0_FOV",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_FOV",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_FOV",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_0_max_yaw_angle",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_max_yaw_angle",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_2_max_yaw_angle",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "set_1_fade_in_camera_set_change",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "set_1_fade_out_camera_set_change",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "set_2_fade_in_camera_set_change",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "set_2_fade_out_camera_set_change",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "input_movement_scalar",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "input_rotation_scalar",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "input_zoom_scalar",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "minimum_pitch_desired",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maximum_pitch_desired",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "minimum_zoom",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maximum_zoom",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "horizontal_rotate_tolerance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "horizontal_rotate_modifier",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "CelebrationParameters": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "animation",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "backgroundObject",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "duration",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "subText",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "mainText",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "iconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "celeLeadIn",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "celeLeadOut",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "cameraPathLOT",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "pathNodeName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "ambientR",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "ambientG",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "ambientB",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "directionalR",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "directionalG",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "directionalB",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "specularR",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "specularG",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "specularB",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "lightPositionX",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "lightPositionY",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "lightPositionZ",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "blendTime",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fogColorR",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fogColorG",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fogColorB",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "musicCue",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "soundGUID",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "mixerProgram",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "ChoiceBuildComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "selections",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "imaginationOverride",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "CollectibleComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "requirement_mission",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "ComponentsRegistry": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "component_type",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "component_id",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "ControlSchemes": {
+      "columns": [
+        {
+          "name": "control_scheme",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "scheme_name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "rotation_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "walk_forward_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "walk_backward_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "walk_strafe_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "walk_strafe_forward_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "walk_strafe_backward_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "run_backward_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "run_strafe_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "run_strafe_forward_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "run_strafe_backward_speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "keyboard_zoom_sensitivity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "keyboard_pitch_sensitivity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "keyboard_yaw_sensitivity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "mouse_zoom_wheel_sensitivity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "x_mouse_move_sensitivity_modifier",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "y_mouse_move_sensitivity_modifier",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "freecam_speed_modifier",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "freecam_slow_speed_multiplier",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "freecam_fast_speed_multiplier",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "freecam_mouse_modifier",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "gamepad_pitch_rot_sensitivity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "gamepad_yaw_rot_sensitivity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "gamepad_trigger_sensitivity",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "CurrencyDenominations": {
+      "columns": [
+        {
+          "name": "value",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "objectid",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "CurrencyTable": {
+      "columns": [
+        {
+          "name": "currencyIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "npcminlevel",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minvalue",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "maxvalue",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "DBExclude": {
+      "columns": [
+        {
+          "name": "table",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "column",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "DeletionRestrictions": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "restricted",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "ids",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "checkType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "DestructibleComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "faction",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "factionList",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "life",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "imagination",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LootMatrixIndex",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "CurrencyIndex",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "level",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "armor",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "death_behavior",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "isnpc",
+          "ty": "Boolean",
+          "nullable": true
+        },
+        {
+          "name": "attack_priority",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "isSmashable",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "difficultyLevel",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "DevModelBehaviors": {
+      "columns": [
+        {
+          "name": "ModelID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "BehaviorID",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "Emotes": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "animationName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "iconFilename",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "channel",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "command",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "locked",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "EventGating": {
+      "columns": [
+        {
+          "name": "eventName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "date_start",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "date_end",
+          "ty": "BigInt",
+          "nullable": false
+        }
+      ]
+    },
+    "ExhibitComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "length",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "width",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "height",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offsetX",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offsetY",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offsetZ",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fReputationSizeMultiplier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fImaginationCost",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "Factions": {
+      "columns": [
+        {
+          "name": "faction",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "factionList",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "factionListFriendly",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "friendList",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "enemyList",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "FeatureGating": {
+      "columns": [
+        {
+          "name": "featureName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "major",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "current",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minor",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "FlairTable": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "asset",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "Icons": {
+      "columns": [
+        {
+          "name": "IconID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "IconPath",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "IconName",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "InventoryComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "itemid",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "equip",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "ItemComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "equipLocation",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "baseValue",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "isKitPiece",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "rarity",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "itemType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "itemInfo",
+          "ty": "BigInt",
+          "nullable": true
+        },
+        {
+          "name": "inLootTable",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "inVendor",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "isUnique",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "isBOP",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "isBOE",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "reqFlagID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reqSpecialtyID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reqSpecRank",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reqAchievementID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "stackSize",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "color1",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "decal",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "offsetGroupID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "buildTypes",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reqPrecondition",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "animationFlag",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "equipEffects",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "readyForQA",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "itemRating",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "isTwoHanded",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "minNumRequired",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "delResIndex",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "currencyLOT",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "altCurrencyCost",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "subItems",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "audioEventUse",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "noEquipAnimation",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "commendationLOT",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "commendationCost",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "audioEquipMetaEventSet",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "currencyCosts",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "ingredientInfo",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "forgeType",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "SellMultiplier",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "ItemEggData": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "chassie_type_id",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "ItemFoodData": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_1",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_1_amount",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_2",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_2_amount",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_3",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_3_amount",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_4",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "element_4_amount",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "ItemSetSkills": {
+      "columns": [
+        {
+          "name": "SkillSetID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "SkillID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "SkillCastType",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "ItemSets": {
+      "columns": [
+        {
+          "name": "setID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "itemIDs",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "kitType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "kitRank",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "kitImage",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "skillSetWith2",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "skillSetWith3",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "skillSetWith4",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "skillSetWith5",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "skillSetWith6",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "kitID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "priority",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "JetPackPadComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "xDistance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "yDistance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "warnDistance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "lotBlocker",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "lotWarningVolume",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "LUPExhibitComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minXZ",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxXZ",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxY",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offsetX",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offsetY",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offsetZ",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "LUPExhibitModelData": {
+      "columns": [
+        {
+          "name": "LOT",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minXZ",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxXZ",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxY",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "owner",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "LUPZoneIDs": {
+      "columns": [
+        {
+          "name": "zoneID",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "LanguageType": {
+      "columns": [
+        {
+          "name": "LanguageID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LanguageDescription",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "LevelProgressionLookup": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "requiredUScore",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "BehaviorEffect",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "LootMatrix": {
+      "columns": [
+        {
+          "name": "LootMatrixIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LootTableIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "RarityTableIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "percent",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "minToDrop",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "maxToDrop",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "flagID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "LootMatrixIndex": {
+      "columns": [
+        {
+          "name": "LootMatrixIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "inNpcEditor",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "LootTable": {
+      "columns": [
+        {
+          "name": "itemid",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LootTableIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "MissionDrop",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "sortPriority",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "LootTableIndex": {
+      "columns": [
+        {
+          "name": "LootTableIndex",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "MinifigComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "head",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "chest",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "legs",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "hairstyle",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "haircolor",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "chestdecal",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "headcolor",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "lefthand",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "righthand",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "eyebrowstyle",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "eyesstyle",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "mouthstyle",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "MinifigDecals_Eyebrows": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "High_path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "Low_path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "CharacterCreateValid",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "male",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "female",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "MinifigDecals_Eyes": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "High_path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "Low_path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "CharacterCreateValid",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "male",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "female",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "MinifigDecals_Legs": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "High_path",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "MinifigDecals_Mouths": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "High_path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "Low_path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "CharacterCreateValid",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "male",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "female",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "MinifigDecals_Torsos": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "High_path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "CharacterCreateValid",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "male",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "female",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "MissionEmail": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "messageType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "notificationGroup",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "missionID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "attachmentLOT",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "MissionNPCComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "missionID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "offersMission",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "acceptsMission",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "MissionTasks": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "taskType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "target",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "targetGroup",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "targetValue",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "taskParam1",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "largeTaskIcon",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "IconID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "uid",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "largeTaskIconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "MissionText": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "story_icon",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "missionIcon",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "offerNPCIcon",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "IconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "state_1_anim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "state_2_anim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "state_3_anim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "state_4_anim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "state_3_turnin_anim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "state_4_turnin_anim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "onclick_anim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "CinematicAccepted",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "CinematicAcceptedLeadin",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "CinematicCompleted",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "CinematicCompletedLeadin",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "CinematicRepeatable",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "CinematicRepeatableLeadin",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "CinematicRepeatableCompleted",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "CinematicRepeatableCompletedLeadin",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_Interact",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_OfferAccept",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_OfferDeny",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_Completed",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_TurnIn",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_Failed",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_Progress",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioMusicCue_OfferAccept",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioMusicCue_TurnIn",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "turnInIconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "Missions": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "defined_type",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "defined_subtype",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "UISortOrder",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "offer_objectID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "target_objectID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_currency",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "LegoScore",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_reputation",
+          "ty": "BigInt",
+          "nullable": true
+        },
+        {
+          "name": "isChoiceReward",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "reward_item1",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item1_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item2",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item2_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item3",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item3_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item4",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item4_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_emote",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_emote2",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_emote3",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reward_emote4",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reward_maximagination",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_maxhealth",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_maxinventory",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_maxmodel",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reward_maxwidget",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "reward_maxwallet",
+          "ty": "BigInt",
+          "nullable": true
+        },
+        {
+          "name": "repeatable",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "reward_currency_repeatable",
+          "ty": "BigInt",
+          "nullable": true
+        },
+        {
+          "name": "reward_item1_repeatable",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item1_repeat_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item2_repeatable",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item2_repeat_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item3_repeatable",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item3_repeat_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item4_repeatable",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_item4_repeat_count",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "time_limit",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "isMission",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "missionIconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "prereqMissionID",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "inMOTD",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "cooldownTime",
+          "ty": "BigInt",
+          "nullable": true
+        },
+        {
+          "name": "isRandom",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "randomPool",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "UIPrereqID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "HUDStates",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reward_bankinventory",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "ModelBehavior": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "definitionXMLfilename",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "ModularBuildComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "buildType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "xml",
+          "ty": "VarChar",
+          "nullable": false
+        },
+        {
+          "name": "createdLOT",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "createdPhysicsID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "AudioEventGUID_Snap",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "AudioEventGUID_Complete",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventGUID_Present",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "ModuleComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "partCode",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "buildType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "xml",
+          "ty": "VarChar",
+          "nullable": false
+        },
+        {
+          "name": "primarySoundGUID",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "assembledEffectID",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "MotionFX": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "typeID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "slamVelocity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "addVelocity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "duration",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "destGroupName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "startScale",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "endScale",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "velocity",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "distance",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "MovementAIComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "MovementType",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "WanderChance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "WanderDelayMin",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "WanderDelayMax",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "WanderSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "WanderRadius",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "attachedPath",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "MovingPlatforms": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "platformIsSimpleMover",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "platformMoveX",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "platformMoveY",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "platformMoveZ",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "platformMoveTime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "platformStartAtEnd",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "NpcIcons": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "color",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "offset",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "LOT",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "Texture",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "isClickable",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "scale",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "rotateToFace",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "compositeHorizOffset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "compositeVertOffset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "compositeScale",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "compositeConnectionNode",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "compositeLOTMultiMission",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "compositeLOTMultiMissionVentor",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "compositeIconTexture",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "ObjectBehaviorXREF": {
+      "columns": [
+        {
+          "name": "LOT",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "behaviorID1",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "behaviorID2",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "behaviorID3",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "behaviorID4",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "behaviorID5",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "ObjectBehaviors": {
+      "columns": [
+        {
+          "name": "BehaviorID",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "xmldata",
+          "ty": "VarChar",
+          "nullable": false
+        }
+      ]
+    },
+    "ObjectSkills": {
+      "columns": [
+        {
+          "name": "objectTemplate",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "skillID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "castOnType",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "AICombatWeight",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "Objects": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "placeable",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "npcTemplateID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "displayName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "interactionDistance",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "nametag",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "_internalNotes",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "HQ_valid",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "PackageComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LootMatrixIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "packageType",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "PetAbilities": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "AbilityName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "ImaginationCost",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "PetComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minTameUpdateTime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxTameUpdateTime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "percentTameChance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "tamability",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "elementType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "walkSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "runSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "sprintSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "idleTimeMin",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "idleTimeMax",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "petForm",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "imaginationDrainRate",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "AudioMetaEventSet",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "buffIDs",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "PetNestComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "ElementalType",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "PhysicsComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "static",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "physics_asset",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "jump",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "doublejump",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "speed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "rotSpeed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "playerHeight",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "playerRadius",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "pcShapeType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "collisionGroup",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "airSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "boundaryAsset",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "jumpAirSpeed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "friction",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "gravityVolumeAsset",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "PlayerFlags": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "SessionOnly",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "OnlySetByServer",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "SessionZoneOnly",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "PlayerStatistics": {
+      "columns": [
+        {
+          "name": "statID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "sortOrder",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "PossessableComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "controlSchemeID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minifigAttachPoint",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "minifigAttachAnimation",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "minifigDetachAnimation",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "mountAttachAnimation",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "mountDetachAnimation",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "attachOffsetFwd",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "attachOffsetRight",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "possessionType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "wantBillboard",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "billboardOffsetUp",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "depossessOnHit",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "hitStunTime",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "skillSet",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "Preconditions": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "targetLOT",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "targetGroup",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "targetCount",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "iconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "validContexts",
+          "ty": "BigInt",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "PropertyEntranceComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "mapID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "propertyName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "isOnProperty",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "groupType",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "PropertyTemplate": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "mapID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "vendorMapID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "spawnName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "sizecode",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "minimumPrice",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "rentDuration",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "path",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "cloneLimit",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "durationType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "achievementRequired",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "zoneX",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "zoneY",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "zoneZ",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxBuildHeight",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "reputationPerMinute",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "ProximityMonitorComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "Proximities",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "LoadOnClient",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "LoadOnServer",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "ProximityTypes": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "Name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "Radius",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "CollisionGroup",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "PassiveChecks",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "IconID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LoadOnClient",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "LoadOnServer",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "RacingModuleComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "topSpeed",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "acceleration",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "handling",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "stability",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "imagination",
+          "ty": "Float",
+          "nullable": true
+        }
+      ]
+    },
+    "RailActivatorComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "startAnim",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "loopAnim",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "stopAnim",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "startSound",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "loopSound",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "stopSound",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "effectIDs",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "preconditions",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "playerCollision",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "cameraLocked",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "StartEffectID",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "StopEffectID",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "DamageImmune",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "NoAggro",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "ShowNameBillboard",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "RarityTable": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "randmax",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "rarity",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "RarityTableIndex",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "RarityTableIndex": {
+      "columns": [
+        {
+          "name": "RarityTableIndex",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "RebuildComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reset_time",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "complete_time",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "take_imagination",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "interruptible",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "self_activator",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "custom_modules",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "activityID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "post_imagination_cost",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "time_before_smash",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "RebuildSections": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "rebuildID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "objectID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "offset_x",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offset_y",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "offset_z",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fall_angle_x",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fall_angle_y",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fall_angle_z",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fall_height",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "requires_list",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "size",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "bPlaced",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "Release_Version": {
+      "columns": [
+        {
+          "name": "ReleaseVersion",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "ReleaseDate",
+          "ty": "BigInt",
+          "nullable": false
+        }
+      ]
+    },
+    "RenderComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "render_asset",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "icon_asset",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "IconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "shader_id",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "effect1",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "effect2",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "effect3",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "effect4",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "effect5",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "effect6",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "animationGroupIDs",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "fade",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "usedropshadow",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "preloadAnimations",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "fadeInTime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "maxShadowDistance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "ignoreCameraCollision",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "renderComponentLOD1",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "renderComponentLOD2",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "gradualSnap",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "animationFlag",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "AudioMetaEventSet",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "billboardHeight",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "chatBubbleOffset",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "staticBillboard",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "LXFMLFolder",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "attachIndicatorsToNode",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "RenderComponentFlash": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "interactive",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "animated",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "nodeName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "flashPath",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "elementName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "_uid",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "RenderComponentWrapper": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "defaultWrapperAsset",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "RenderIconAssets": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "icon_asset",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "blank_column",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "ReputationRewards": {
+      "columns": [
+        {
+          "name": "repLevel",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "sublevel",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reputation",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "RewardCodes": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "code",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "attachmentLOT",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "Rewards": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LevelID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "MissionID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "RewardType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "count",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "RocketLaunchpadControlComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "targetZone",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "defaultZoneID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "targetScene",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "gmLevel",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "playerAnimation",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "rocketAnimation",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "launchMusic",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "useLaunchPrecondition",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "useAltLandingPrecondition",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "launchPrecondition",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "altLandingPrecondition",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "altLandingSpawnPointName",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "SceneTable": {
+      "columns": [
+        {
+          "name": "sceneID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "sceneName",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "ScriptComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "script_name",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "client_script_name",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "SkillBehavior": {
+      "columns": [
+        {
+          "name": "skillID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "behaviorID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "imaginationcost",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "cooldowngroup",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "cooldown",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "inNpcEditor",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "skillIcon",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "oomSkillID",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "oomBehaviorEffectID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "castTypeDesc",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "imBonusUI",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "lifeBonusUI",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "armorBonusUI",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "damageUI",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "hideIcon",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "cancelType",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "SmashableChain": {
+      "columns": [
+        {
+          "name": "chainIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "chainLevel",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "lootMatrixID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "rarityTableIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "currencyIndex",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "currencyLevel",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "smashCount",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "timeLimit",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "chainStepID",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "SmashableChainIndex": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "targetGroup",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "continuous",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "SmashableComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LootMatrixIndex",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "SmashableElements": {
+      "columns": [
+        {
+          "name": "elementID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "dropWeight",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "SpeedchatMenu": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "parentId",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "emoteId",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "imageName",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "SubscriptionPricing": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "countryCode",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "monthlyFeeGold",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "monthlyFeeSilver",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "monthlyFeeBronze",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "monetarySymbol",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "symbolIsAppended",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "SurfaceType": {
+      "columns": [
+        {
+          "name": "SurfaceType",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "FootstepNDAudioMetaEventSetName",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "TamingBuildPuzzles": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "PuzzleModelLot",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "NPCLot",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "ValidPiecesLXF",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "InvalidPiecesLXF",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "Difficulty",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "Timelimit",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "NumValidPieces",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "TotalNumPieces",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "ModelName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "FullModelLXF",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "Duration",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "imagCostPerBuild",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "TextDescription": {
+      "columns": [
+        {
+          "name": "TextID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "TestDescription",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "TextLanguage": {
+      "columns": [
+        {
+          "name": "TextID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LanguageID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "Text",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "TrailEffects": {
+      "columns": [
+        {
+          "name": "trailID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "textureName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "blendmode",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "cardlifetime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "colorlifetime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "minTailFade",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "tailFade",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "max_particles",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "birthDelay",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "deathDelay",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "bone1",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "bone2",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "texLength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "texWidth",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "startColorR",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "startColorG",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "startColorB",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "startColorA",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "middleColorR",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "middleColorG",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "middleColorB",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "middleColorA",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "endColorR",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "endColorG",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "endColorB",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "endColorA",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "UGBehaviorSounds": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "guid",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "VehiclePhysics": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "hkxFilename",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "fGravityScale",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fMass",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fChassisFriction",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fMaxSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fEngineTorque",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBrakeFrontTorque",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBrakeRearTorque",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBrakeMinInputToBlock",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBrakeMinTimeToBlock",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSteeringMaxAngle",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSteeringSpeedLimitForMaxAngle",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSteeringMinAngle",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fFwdBias",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fFrontTireFriction",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fRearTireFriction",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fFrontTireFrictionSlide",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fRearTireFrictionSlide",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fFrontTireSlipAngle",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fRearTireSlipAngle",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelWidth",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelRadius",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelMass",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fReorientPitchStrength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fReorientRollStrength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSuspensionLength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSuspensionStrength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSuspensionDampingCompression",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSuspensionDampingRelaxation",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "iChassisCollisionGroup",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "fNormalSpinDamping",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fCollisionSpinDamping",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fCollisionThreshold",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fTorqueRollFactor",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fTorquePitchFactor",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fTorqueYawFactor",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInertiaRoll",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInertiaPitch",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInertiaYaw",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fExtraTorqueFactor",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fCenterOfMassFwd",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fCenterOfMassUp",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fCenterOfMassRight",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelHardpointFrontFwd",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelHardpointFrontUp",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelHardpointFrontRight",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelHardpointRearFwd",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelHardpointRearUp",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWheelHardpointRearRight",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputTurnSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputDeadTurnBackSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputAccelSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputDeadAccelDownSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputDecelSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputDeadDecelDownSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputSlopeChangePointX",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputInitialSlope",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fInputDeadZone",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fAeroAirDensity",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fAeroFrontalArea",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fAeroDragCoefficient",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fAeroLiftCoefficient",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fAeroExtraGravity",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBoostTopSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBoostCostPerSecond",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBoostAccelerateChange",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fBoostDampingChange",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fPowerslideNeutralAngle",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fPowerslideTorqueStrength",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "iPowerslideNumTorqueApplications",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "fImaginationTankSize",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fSkillCost",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fWreckSpeedBase",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fWreckSpeedPercent",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "fWreckMinAngle",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventEngine",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventSkid",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventLightHit",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioSpeedThresholdLightHit",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "AudioTimeoutLightHit",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "AudioEventHeavyHit",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioSpeedThresholdHeavyHit",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "AudioTimeoutHeavyHit",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "AudioEventStart",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadConcrete",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadSand",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadWood",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadDirt",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadPlastic",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadGrass",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadGravel",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadMud",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadWater",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadSnow",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadIce",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadMetal",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventTreadLeaves",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioEventLightLand",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioAirtimeForLightLand",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "AudioEventHeavyLand",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "AudioAirtimeForHeavyLand",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "bWheelsVisible",
+          "ty": "Boolean",
+          "nullable": true
+        }
+      ]
+    },
+    "VehicleStatMap": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "ModuleStat",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "HavokStat",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "HavokChangePerModuleStat",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "VendorComponent": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "buyScalar",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "sellScalar",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "refreshTimeSeconds",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "LootMatrixIndex",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "WhatsCoolItemSpotlight": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "itemID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "WhatsCoolNewsAndTips": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "iconID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "type",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "WorldConfig": {
+      "columns": [
+        {
+          "name": "WorldConfigID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "pegravityvalue",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "pebroadphaseworldsize",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "pegameobjscalefactor",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_rotation_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_walk_forward_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_walk_backward_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_walk_strafe_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_walk_strafe_forward_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_walk_strafe_backward_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_run_backward_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_run_strafe_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_run_strafe_forward_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_run_strafe_backward_speed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "global_cooldown",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "characterGroundedTime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "characterGroundedSpeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "globalImmunityTime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_max_slope",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "defaultrespawntime",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "mission_tooltip_timeout",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "vendor_buy_multiplier",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "pet_follow_radius",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "character_eye_height",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "flight_vertical_velocity",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "flight_airspeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "flight_fuel_ratio",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "flight_max_airspeed",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "fReputationPerVote",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "nPropertyCloneLimit",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "defaultHomespaceTemplate",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "coins_lost_on_death_percent",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "coins_lost_on_death_min",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "coins_lost_on_death_max",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "character_votes_per_day",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "property_moderation_request_approval_cost",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "property_moderation_request_review_cost",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "propertyModRequestsAllowedSpike",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "propertyModRequestsAllowedInterval",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "propertyModRequestsAllowedTotal",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "propertyModRequestsSpikeDuration",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "propertyModRequestsIntervalDuration",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "modelModerateOnCreate",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "defaultPropertyMaxHeight",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "reputationPerVoteCast",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "reputationPerVoteReceived",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "showcaseTopModelConsiderationBattles",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "reputationPerBattlePromotion",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "coins_lost_on_death_min_timeout",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "coins_lost_on_death_max_timeout",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "mail_base_fee",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "mail_percent_attachment_fee",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "propertyReputationDelay",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LevelCap",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LevelUpBehaviorEffect",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "CharacterVersion",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "LevelCapCurrencyConversion",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "ZoneLoadingTips": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "zoneid",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "imagelocation",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "weight",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "targetVersion",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "ZoneSummary": {
+      "columns": [
+        {
+          "name": "zoneID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "type",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "_uniqueID",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "ZoneTable": {
+      "columns": [
+        {
+          "name": "zoneID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "zoneName",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "scriptID",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "ghostdistance_min",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "ghostdistance",
+          "ty": "Float",
+          "nullable": false
+        },
+        {
+          "name": "population_soft_cap",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "population_hard_cap",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "DisplayDescription",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "mapFolder",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "smashableMinDistance",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "smashableMaxDistance",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "mixerProgram",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "clientPhysicsFramerate",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "serverPhysicsFramerate",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "zoneControlTemplate",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "widthInChunks",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "heightInChunks",
+          "ty": "Integer",
+          "nullable": true
+        },
+        {
+          "name": "petsAllowed",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "localize",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "fZoneWeight",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "thumbnail",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "PlayerLoseCoinsOnDeath",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "disableSaveLoc",
+          "ty": "Boolean",
+          "nullable": false
+        },
+        {
+          "name": "teamRadius",
+          "ty": "Float",
+          "nullable": true
+        },
+        {
+          "name": "gate_version",
+          "ty": "Text",
+          "nullable": true
+        },
+        {
+          "name": "mountsAllowed",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "brickAttributes": {
+      "columns": [
+        {
+          "name": "ID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "icon_asset",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "display_order",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "locStatus",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "dtproperties": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "objectid",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "property",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "value",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "uvalue",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "lvalue",
+          "ty": "Nothing",
+          "nullable": false
+        },
+        {
+          "name": "version",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "mapAnimationPriorities": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "priority",
+          "ty": "Float",
+          "nullable": false
+        }
+      ]
+    },
+    "mapAssetType": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "label",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "pathdir",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "typelabel",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "mapIcon": {
+      "columns": [
+        {
+          "name": "LOT",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "iconID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "iconState",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "mapItemTypes": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "equipLocation",
+          "ty": "Text",
+          "nullable": true
+        }
+      ]
+    },
+    "mapRenderEffects": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "gameID",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    },
+    "mapShaders": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "label",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "gameValue",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "priority",
+          "ty": "Integer",
+          "nullable": true
+        }
+      ]
+    },
+    "mapTextureResource": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "texturepath",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "SurfaceType",
+          "ty": "Integer",
+          "nullable": false
+        }
+      ]
+    },
+    "map_BlueprintCategory": {
+      "columns": [
+        {
+          "name": "id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "description",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "enabled",
+          "ty": "Boolean",
+          "nullable": false
+        }
+      ]
+    },
+    "sysdiagrams": {
+      "columns": [
+        {
+          "name": "name",
+          "ty": "Text",
+          "nullable": false
+        },
+        {
+          "name": "principal_id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "diagram_id",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "version",
+          "ty": "Integer",
+          "nullable": false
+        },
+        {
+          "name": "definition",
+          "ty": "Text",
+          "nullable": false
+        }
+      ]
+    }
+  }
+}

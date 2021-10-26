@@ -1,35 +1,123 @@
-use std::{
-    path::{Component, Path, PathBuf},
-    sync::Arc,
-};
+#![warn(missing_docs)]
+
+//! # Typed bindings to `CDClient.fdb`
+//!
+//! This crate provides typed bindings to an FDB file that follows the structure of
+//! `CDClient.fdb` from the 1.10.64 client. The design goals are:
+//!
+//! - Make writing code that uses this API as easy as possible
+//! - Enable serialization with the [`serde`](https://serde.rs) crate
+//! - Accept FDBs that may have additional columns and tables
 
 use assembly_core::buffer::CastError;
-use assembly_data::{
-    fdb::{
-        common::{Latin1Str, Value},
-        mem::Tables,
-    },
-    xml::localization::LocaleNode,
+use assembly_fdb::{
+    common::{Latin1Str, Value},
+    mem::{Row, Table, Tables},
 };
 
-pub mod typed_ext;
-pub mod typed_rows;
-pub mod typed_tables;
+include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
-use typed_tables::{
+pub mod ext;
+//pub mod typed_rows;
+//pub mod typed_tables;
+
+use columns::{IconsColumn, MissionTasksColumn, MissionsColumn};
+use tables::{
     BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable,
-    DestructibleComponentTable, IconsTable, ItemSetSkillsTable, ItemSetsTable, LootTable,
+    DestructibleComponentTable, IconsTable, ItemSetSkillsTable, ItemSetsTable, LootTableTable,
     MissionTasksTable, MissionsTable, ObjectSkillsTable, ObjectsTable, RebuildComponentTable,
-    RenderComponentTable, SkillBehaviorTable, TypedTable,
+    RenderComponentTable, SkillBehaviorTable,
 };
 
-use self::typed_ext::{Components, Mission, MissionKind, MissionTask};
+use self::ext::{Components, Mission, MissionTask};
+
+/// ## A "typed" database row
+///
+/// A typed table is the combination of a "raw" table from the `assembly_fdb` crate with
+/// some metadata. Examples for this metadata are:
+///
+/// - Mapping from a well-known column name (e.g. `MissionID`) to the "real" column index within the FDB
+pub trait TypedTable<'de> {
+    /// The type representing one well-known column
+    type Column: Copy + Clone + Eq;
+
+    /// Return the contained "raw" table
+    fn as_raw(&self) -> Table<'de>;
+    /// Create a typed table from a raw table.
+    ///
+    /// This function constructs the necessary metadata.
+    fn new(inner: Table<'de>) -> Self;
+}
+
+/// ## A "typed" database row
+///
+/// A typed row is the combination of a "raw" row from the `assembly_fdb crate with the typing information
+/// given in [`TypedRow::Table`].
+pub trait TypedRow<'a, 'b> {
+    /// The table this row belongs to
+    type Table: TypedTable<'a> + 'a;
+
+    /// Creates a new "typed" row from a "typed" table and a "raw" row
+    fn new(inner: Row<'a>, table: &'b Self::Table) -> Self;
+
+    /// Get a specific entry from the row by unique ID
+    ///
+    /// The `index_key` is the value of the first column, the `key` is the value of the unique ID column
+    /// and the `id_col` must be the "real" index of that unique ID column.
+    fn get(table: &'b Self::Table, index_key: i32, key: i32, id_col: usize) -> Option<Self>
+    where
+        Self: Sized,
+    {
+        let hash = index_key as usize % table.as_raw().bucket_count();
+        if let Some(b) = table.as_raw().bucket_at(hash) {
+            for r in b.row_iter() {
+                if r.field_at(id_col).and_then(|x| x.into_opt_integer()) == Some(key) {
+                    return Some(Self::new(r, table));
+                }
+            }
+        }
+        None
+    }
+}
+
+/// # Iterator over [`TypedRow`]s
+///
+/// This class is used to iterate over typed rows
+pub struct RowIter<'a, 'b, R>
+where
+    R: TypedRow<'a, 'b>,
+{
+    inner: assembly_fdb::mem::iter::TableRowIter<'a>,
+    table: &'b R::Table,
+}
+
+impl<'a, 'b, R> RowIter<'a, 'b, R>
+where
+    R: TypedRow<'a, 'b>,
+{
+    /// Create a new row iter from a typed table
+    pub fn new(table: &'b R::Table) -> Self {
+        Self {
+            inner: table.as_raw().row_iter(),
+            table,
+        }
+    }
+}
+
+impl<'a, 'b, R> Iterator for RowIter<'a, 'b, R>
+where
+    R: TypedRow<'a, 'b>,
+{
+    type Item = R;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.inner.next().map(|row| R::new(row, self.table))
+    }
+}
 
 #[derive(Clone)]
+/// A selection of relevant database tables
 pub struct TypedDatabase<'db> {
-    pub locale: Arc<LocaleNode>,
-    /// LU-Res Prefix
-    pub lu_res_prefix: &'db str,
     /// BehaviorParameter
     pub behavior_parameters: BehaviorParameterTable<'db>,
     /// BehaviorTemplate
@@ -45,7 +133,7 @@ pub struct TypedDatabase<'db> {
     /// ItemSetSkills
     pub item_set_skills: ItemSetSkillsTable<'db>,
     /// LootTable
-    pub loot_table: LootTable<'db>,
+    pub loot_table: LootTableTable<'db>,
     /// Missions
     pub missions: MissionsTable<'db>,
     /// MissionTasks
@@ -66,32 +154,9 @@ fn is_not_empty(s: &&Latin1Str) -> bool {
     !s.is_empty()
 }
 
-fn cleanup_path(url: &Latin1Str) -> Option<PathBuf> {
-    let url = url.decode().replace('\\', "/").to_ascii_lowercase();
-    let p = Path::new(&url);
-
-    let mut path = Path::new("/textures/ui").to_owned();
-    for comp in p.components() {
-        match comp {
-            Component::ParentDir => {
-                path.pop();
-            }
-            Component::CurDir => {}
-            Component::Normal(seg) => path.push(seg),
-            Component::RootDir => return None,
-            Component::Prefix(_) => return None,
-        }
-    }
-    path.set_extension("png");
-    Some(path)
-}
-
 impl<'a> TypedDatabase<'a> {
-    pub fn new(
-        locale: Arc<LocaleNode>,
-        lu_res_prefix: &'a str,
-        tables: Tables<'a>,
-    ) -> Result<Self, CastError> {
+    /// Construct a new typed database
+    pub fn new(tables: Tables<'a>) -> Result<Self, CastError> {
         let behavior_parameter_inner = tables.by_name("BehaviorParameter").unwrap()?;
         let behavior_template_inner = tables.by_name("BehaviorTemplate").unwrap()?;
         let components_registry_inner = tables.by_name("ComponentsRegistry").unwrap()?;
@@ -108,8 +173,6 @@ impl<'a> TypedDatabase<'a> {
         let render_component_inner = tables.by_name("RenderComponent").unwrap()?;
         let skill_behavior_inner = tables.by_name("SkillBehavior").unwrap()?;
         Ok(TypedDatabase {
-            locale,
-            lu_res_prefix,
             behavior_parameters: BehaviorParameterTable::new(behavior_parameter_inner),
             behavior_templates: BehaviorTemplateTable::new(behavior_template_inner),
             comp_reg: ComponentsRegistryTable::new(components_registry_inner),
@@ -117,7 +180,7 @@ impl<'a> TypedDatabase<'a> {
             icons: IconsTable::new(icons_inner),
             item_sets: ItemSetsTable::new(item_sets_inner),
             item_set_skills: ItemSetSkillsTable::new(item_set_skills_inner),
-            loot_table: LootTable::new(loot_table_inner),
+            loot_table: LootTableTable::new(loot_table_inner),
             missions: MissionsTable::new(missions_inner),
             mission_tasks: MissionTasksTable::new(mission_tasks_inner),
             objects: ObjectsTable::new(objects_inner),
@@ -128,89 +191,50 @@ impl<'a> TypedDatabase<'a> {
         })
     }
 
-    pub fn get_mission_name(&self, kind: MissionKind, id: i32) -> Option<String> {
-        let missions = self.locale.str_children.get("Missions").unwrap();
-        if id > 0 {
-            if let Some(mission) = missions.int_children.get(&(id as u32)) {
-                if let Some(name_node) = mission.str_children.get("name") {
-                    let name = name_node.value.as_ref().unwrap();
-                    return Some(format!("{} | {:?} #{}", name, kind, id));
-                }
-            }
-        }
-        None
-    }
-
-    pub fn get_item_set_name(&self, rank: i32, id: i32) -> Option<String> {
-        let missions = self.locale.str_children.get("ItemSets").unwrap();
-        if id > 0 {
-            if let Some(mission) = missions.int_children.get(&(id as u32)) {
-                if let Some(name_node) = mission.str_children.get("kitName") {
-                    let name = name_node.value.as_ref().unwrap();
-                    return Some(if rank > 0 {
-                        format!("{} (Rank {}) | Item Set #{}", name, rank, id)
-                    } else {
-                        format!("{} | Item Set #{}", name, id)
-                    });
-                }
-            }
-        }
-        None
-    }
-
-    pub fn get_skill_name_desc(&self, id: i32) -> (Option<String>, Option<String>) {
-        let skills = self.locale.str_children.get("SkillBehavior").unwrap();
-        let mut the_name = None;
-        let mut the_desc = None;
-        if id > 0 {
-            if let Some(skill) = skills.int_children.get(&(id as u32)) {
-                if let Some(name_node) = skill.str_children.get("name") {
-                    let name = name_node.value.as_ref().unwrap();
-                    the_name = Some(format!("{} | Item Set #{}", name, id));
-                }
-                if let Some(desc_node) = skill.str_children.get("descriptionUI") {
-                    let desc = desc_node.value.as_ref().unwrap();
-                    the_desc = Some(desc.clone());
-                }
-            }
-        }
-        (the_name, the_desc)
-    }
-
-    pub fn get_icon_path(&self, id: i32) -> Option<PathBuf> {
+    /// Get the path of an icon ID
+    pub fn get_icon_path(&self, id: i32) -> Option<&Latin1Str> {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let bucket = self.icons.as_table().bucket_for_hash(hash);
+        let bucket = self.icons.as_raw().bucket_for_hash(hash);
+
+        let col_icon_path = self
+            .icons
+            .get_col(IconsColumn::IconPath)
+            .expect("Missing column 'Icons::IconPath'");
 
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
             if id_field == Value::Integer(id) {
-                if let Some(url) = row
-                    .field_at(self.icons.col_icon_path)
-                    .unwrap()
-                    .into_opt_text()
-                {
-                    return cleanup_path(url);
-                }
+                return row.field_at(col_icon_path).unwrap().into_opt_text();
             }
         }
         None
     }
 
+    /// Get data for the specified mission ID
     pub fn get_mission_data(&self, id: i32) -> Option<Mission> {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let bucket = self.missions.as_table().bucket_for_hash(hash);
+        let bucket = self.missions.as_raw().bucket_for_hash(hash);
+
+        let col_mission_icon_id = self
+            .missions
+            .get_col(MissionsColumn::MissionIconId)
+            .expect("Missing column 'Missions::mission_icon_id'");
+        let col_is_mission = self
+            .missions
+            .get_col(MissionsColumn::IsMission)
+            .expect("Missing column 'Missions::is_mission'");
 
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
             if id_field == Value::Integer(id) {
                 let mission_icon_id = row
-                    .field_at(self.missions.col_mission_icon_id)
+                    .field_at(col_mission_icon_id)
                     .unwrap()
                     .into_opt_integer();
                 let is_mission = row
-                    .field_at(self.missions.col_is_mission)
+                    .field_at(col_is_mission)
                     .unwrap()
                     .into_opt_boolean()
                     .unwrap_or(true);
@@ -224,24 +248,27 @@ impl<'a> TypedDatabase<'a> {
         None
     }
 
+    /// Get a list of mission tasks for the specified mission ID
     pub fn get_mission_tasks(&self, id: i32) -> Vec<MissionTask> {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let bucket = self.mission_tasks.as_table().bucket_for_hash(hash);
+        let bucket = self.mission_tasks.as_raw().bucket_for_hash(hash);
         let mut tasks = Vec::with_capacity(4);
+
+        let col_icon_id = self
+            .mission_tasks
+            .get_col(MissionTasksColumn::IconId)
+            .expect("Missing column 'MissionTasks::icon_id'");
+        let col_uid = self
+            .mission_tasks
+            .get_col(MissionTasksColumn::Uid)
+            .expect("Missing column 'MissionTasks::uid'");
 
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
             if id_field == Value::Integer(id) {
-                let icon_id = row
-                    .field_at(self.mission_tasks.col_icon_id)
-                    .unwrap()
-                    .into_opt_integer();
-                let uid = row
-                    .field_at(self.mission_tasks.col_uid)
-                    .unwrap()
-                    .into_opt_integer()
-                    .unwrap();
+                let icon_id = row.field_at(col_icon_id).unwrap().into_opt_integer();
+                let uid = row.field_at(col_uid).unwrap().into_opt_integer().unwrap();
 
                 tasks.push(MissionTask { icon_id, uid })
             }
@@ -249,10 +276,11 @@ impl<'a> TypedDatabase<'a> {
         tasks
     }
 
+    /// Get the name and description for the specified LOT
     pub fn get_object_name_desc(&self, id: i32) -> Option<(String, String)> {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
 
-        let table = self.objects.as_table();
+        let table = self.objects.as_raw();
         let bucket = table
             .bucket_at(hash as usize % table.bucket_count())
             .unwrap();
@@ -304,9 +332,10 @@ impl<'a> TypedDatabase<'a> {
         None
     }
 
-    pub fn get_render_image(&self, id: i32) -> Option<String> {
+    /// Get the path of the icon asset of the specified render component
+    pub fn get_render_image(&self, id: i32) -> Option<&Latin1Str> {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let table = self.render_comp.as_table();
+        let table = self.render_comp.as_raw();
         let bucket = table
             .bucket_at(hash as usize % table.bucket_count())
             .unwrap();
@@ -319,21 +348,17 @@ impl<'a> TypedDatabase<'a> {
                 let icon_asset = fields.next().unwrap();
 
                 if let Value::Text(url) = icon_asset {
-                    let path = cleanup_path(url)?;
-                    return Some(self.to_res_href(&path));
+                    return Some(url);
                 }
             }
         }
         None
     }
 
-    pub fn to_res_href(&self, path: &Path) -> String {
-        format!("{}{}", self.lu_res_prefix, path.display())
-    }
-
+    /// Get all components for the specified LOT
     pub fn get_components(&self, id: i32) -> Components {
         let hash = u32::from_ne_bytes(id.to_ne_bytes());
-        let table = self.comp_reg.as_table();
+        let table = self.comp_reg.as_raw();
         let bucket = table
             .bucket_at(hash as usize % table.bucket_count())
             .unwrap();
