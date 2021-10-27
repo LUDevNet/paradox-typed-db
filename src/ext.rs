@@ -1,9 +1,6 @@
 //! # Extensions to the auto-generated queries
 
-use assembly_fdb::{
-    common::{Latin1Str, Value},
-    mem::Row,
-};
+use assembly_fdb::common::{Latin1Str, Value};
 
 use crate::{
     columns::{ItemSetsColumn, SkillBehaviorColumn},
