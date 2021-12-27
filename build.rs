@@ -79,11 +79,11 @@ fn run() -> Result<(), io::Error> {
             });
 
             ser_stmts.push(quote! {
-                s.serialize_field(&#cn, &self.#cname())?;
+                s.serialize_field(#cn, &self.#cname())?;
             });
 
             let doc = format!("Get the data in column `{}`", &cspec.name);
-            let (t, m) = match &cspec.ty {
+            let (return_type, map_fn) = match &cspec.ty {
                 ValueType::Nothing => (quote!(()), quote!(|_| Some(()))),
                 ValueType::Integer => (quote!(i32), quote!(Field::into_opt_integer)),
                 ValueType::Float => (quote!(f32), quote!(Field::into_opt_float)),
@@ -97,17 +97,23 @@ fn run() -> Result<(), io::Error> {
             let f = if cspec.nullable {
                 quote! {
                     #[doc = #doc]
-                    pub fn #cname(&self) -> Option<#t> {
+                    pub fn #cname(&self) -> Option<#return_type> {
                         let index = self.table.get_col(#columns::#cfname).unwrap();
-                        self.row.field_at(index).and_then(#m)
+                        self.row.field_at(index).and_then(#map_fn)
                     }
                 }
             } else {
+                // Fix some clippy lints
+                let (map, ret) = if matches!(cspec.ty, ValueType::Nothing) {
+                    (quote!(.map(|_| ())), quote!())
+                } else {
+                    (quote!(.and_then(#map_fn)), quote!( -> #return_type))
+                };
                 quote! {
                     #[doc = #doc]
-                    pub fn #cname(&self) -> #t {
+                    pub fn #cname(&self) #ret {
                         let index = self.table.get_col(#columns::#cfname).unwrap();
-                        self.row.field_at(index).and_then(#m).unwrap()
+                        self.row.field_at(index)#map.unwrap()
                     }
                 }
             };
@@ -213,7 +219,7 @@ fn run() -> Result<(), io::Error> {
                 fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
                 where
                     S: serde::Serializer {
-                    let mut s = serializer.serialize_struct(&#name, #ccount)?;
+                    let mut s = serializer.serialize_struct(#name, #ccount)?;
                     #(#ser_stmts)*
                     s.end()
                 }
