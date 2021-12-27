@@ -5,9 +5,11 @@ edition = "2018"
 
 [dependencies.assembly-core]
 git = "https://github.com/Xiphoseer/assembly_rs.git"
+rev = "d9cd46b29b7a7e92166b0f23a4082851ed04cffc"
 
 [dependencies.assembly-fdb]
 git = "https://github.com/Xiphoseer/assembly_rs.git"
+rev = "d9cd46b29b7a7e92166b0f23a4082851ed04cffc"
 default-features = false
 features = ["serde-derives"]
 
