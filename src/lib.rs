@@ -53,7 +53,10 @@ pub trait TypedTable<'de> {
 ///
 /// A typed row is the combination of a "raw" row from the `assembly_fdb crate with the typing information
 /// given in [`TypedRow::Table`].
-pub trait TypedRow<'a, 'b> {
+pub trait TypedRow<'a, 'b>
+where
+    'a: 'b,
+{
     /// The table this row belongs to
     type Table: TypedTable<'a> + 'a;
 

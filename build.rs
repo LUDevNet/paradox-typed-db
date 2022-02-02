@@ -274,13 +274,20 @@ fn run() -> Result<(), io::Error> {
     std::fs::write(&rows_file, format!("{}", rows))?;
     std::fs::write(&generated_file, format!("{}", generated))?;
 
-    Command::new("rustfmt")
+    match Command::new("rustfmt")
         .arg(&columns_file)
         .arg(&tables_file)
         .arg(&rows_file)
         .arg(&generated_file)
-        .spawn()?
-        .wait()?;
+        .spawn()
+    {
+        Ok(mut p) => {
+            p.wait()?;
+        }
+        Err(e) => {
+            println!("cargo:warning=rustfmt: {}", e);
+        }
+    }
 
     Ok(())
 }
