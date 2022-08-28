@@ -18,16 +18,17 @@ use assembly_fdb::{
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
 pub mod ext;
-//pub mod typed_rows;
-//pub mod typed_tables;
 
 use columns::{IconsColumn, MissionTasksColumn, MissionsColumn};
 use tables::{
     ActivitiesTable, ActivityTextTable, BehaviorParameterTable, BehaviorTemplateTable,
-    ComponentsRegistryTable, DeletionRestrictionsTable, DestructibleComponentTable, IconsTable,
-    ItemSetSkillsTable, ItemSetsTable, LootTableTable, MissionTasksTable, MissionsTable,
-    ObjectSkillsTable, ObjectsTable, RebuildComponentTable, RenderComponentTable,
-    SkillBehaviorTable,
+    ComponentsRegistryTable, DeletionRestrictionsTable, DestructibleComponentTable, EmotesTable,
+    IconsTable, ItemSetSkillsTable, ItemSetsTable, LootMatrixTable, LootTableTable,
+    MissionEmailTable, MissionNpcComponentTable, MissionTasksTable, MissionTextTable,
+    MissionsTable, ObjectSkillsTable, ObjectsTable, PlayerStatisticsTable, PreconditionsTable,
+    PropertyTemplateTable, RebuildComponentTable, RenderComponentTable, RewardCodesTable,
+    SkillBehaviorTable, SpeedchatMenuTable, UgBehaviorSoundsTable, WhatsCoolItemSpotlightTable,
+    WhatsCoolNewsAndTipsTable, ZoneLoadingTipsTable, ZoneTableTable,
 };
 
 use self::ext::{Components, Mission, MissionTask};
@@ -144,6 +145,8 @@ pub struct TypedDatabase<'db> {
     pub comp_reg: ComponentsRegistryTable<'db>,
     /// DestructibleComponent
     pub destructible_component: DestructibleComponentTable<'db>,
+    /// Emotes
+    pub emotes: EmotesTable<'db>,
     /// Icons
     pub icons: IconsTable<'db>,
     /// ItemSets
@@ -152,20 +155,48 @@ pub struct TypedDatabase<'db> {
     pub item_set_skills: ItemSetSkillsTable<'db>,
     /// LootTable
     pub loot_table: LootTableTable<'db>,
-    /// Missions
-    pub missions: MissionsTable<'db>,
+    /// LootMatrix
+    pub loot_matrix: LootMatrixTable<'db>,
+    /// MissionEmail
+    pub mission_email: MissionEmailTable<'db>,
+    /// MissionNPCComponent
+    pub mission_npc_component: MissionNpcComponentTable<'db>,
     /// MissionTasks
     pub mission_tasks: MissionTasksTable<'db>,
+    /// MissionText
+    pub mission_text: MissionTextTable<'db>,
+    /// Missions
+    pub missions: MissionsTable<'db>,
     /// Objects
     pub objects: ObjectsTable<'db>,
     /// Objects
     pub object_skills: ObjectSkillsTable<'db>,
+    /// PlayerStatistics
+    pub player_statistics: PlayerStatisticsTable<'db>,
+    /// Preconditions
+    pub preconditions: PreconditionsTable<'db>,
+    /// PropertyTemplate
+    pub property_template: PropertyTemplateTable<'db>,
     /// RebuildComponent
     pub rebuild_component: RebuildComponentTable<'db>,
+    /// RewardCodes
+    pub reward_codes: RewardCodesTable<'db>,
     /// RenderComponent
     pub render_comp: RenderComponentTable<'db>,
     /// SkillBehavior
     pub skills: SkillBehaviorTable<'db>,
+    /// SpeedchatMenu
+    pub speedchat_menu: SpeedchatMenuTable<'db>,
+    /// UGBehaviorSounds
+    pub ug_behavior_sounds: UgBehaviorSoundsTable<'db>,
+    /// WhatsCoolItemSpotlight
+    pub whats_cool_item_spotlight: WhatsCoolItemSpotlightTable<'db>,
+    /// WhatsCoolNewsAndTips
+    pub whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable<'db>,
+    /// ZoneLoadingTips
+    pub zone_loading_tips: ZoneLoadingTipsTable<'db>,
+    /// ZoneTable
+    pub zone_table: ZoneTableTable<'db>,
 }
 
 fn is_not_empty(s: &&Latin1Str) -> bool {
@@ -183,17 +214,32 @@ impl<'a> TypedDatabase<'a> {
             comp_reg: ComponentsRegistryTable::of(tables).unwrap()?,
             deletion_restrictions: DeletionRestrictionsTable::of(tables).unwrap()?,
             destructible_component: DestructibleComponentTable::of(tables).unwrap()?,
+            emotes: EmotesTable::of(tables).unwrap()?,
             icons: IconsTable::of(tables).unwrap()?,
             item_sets: ItemSetsTable::of(tables).unwrap()?,
             item_set_skills: ItemSetSkillsTable::of(tables).unwrap()?,
+            loot_matrix: LootMatrixTable::of(tables).unwrap()?,
             loot_table: LootTableTable::of(tables).unwrap()?,
-            missions: MissionsTable::of(tables).unwrap()?,
+            mission_email: MissionEmailTable::of(tables).unwrap()?,
+            mission_npc_component: MissionNpcComponentTable::of(tables).unwrap()?,
             mission_tasks: MissionTasksTable::of(tables).unwrap()?,
+            mission_text: MissionTextTable::of(tables).unwrap()?,
+            missions: MissionsTable::of(tables).unwrap()?,
             objects: ObjectsTable::of(tables).unwrap()?,
             object_skills: ObjectSkillsTable::of(tables).unwrap()?,
+            player_statistics: PlayerStatisticsTable::of(tables).unwrap()?,
+            preconditions: PreconditionsTable::of(tables).unwrap()?,
+            property_template: PropertyTemplateTable::of(tables).unwrap()?,
+            reward_codes: RewardCodesTable::of(tables).unwrap()?,
             rebuild_component: RebuildComponentTable::of(tables).unwrap()?,
             render_comp: RenderComponentTable::of(tables).unwrap()?,
             skills: SkillBehaviorTable::of(tables).unwrap()?,
+            speedchat_menu: SpeedchatMenuTable::of(tables).unwrap()?,
+            ug_behavior_sounds: UgBehaviorSoundsTable::of(tables).unwrap()?,
+            whats_cool_item_spotlight: WhatsCoolItemSpotlightTable::of(tables).unwrap()?,
+            whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable::of(tables).unwrap()?,
+            zone_loading_tips: ZoneLoadingTipsTable::of(tables).unwrap()?,
+            zone_table: ZoneTableTable::of(tables).unwrap()?,
         })
     }
 
