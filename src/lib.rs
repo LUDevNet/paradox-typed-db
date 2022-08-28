@@ -23,10 +23,11 @@ pub mod ext;
 
 use columns::{IconsColumn, MissionTasksColumn, MissionsColumn};
 use tables::{
-    BehaviorParameterTable, BehaviorTemplateTable, ComponentsRegistryTable,
-    DestructibleComponentTable, IconsTable, ItemSetSkillsTable, ItemSetsTable, LootTableTable,
-    MissionTasksTable, MissionsTable, ObjectSkillsTable, ObjectsTable, RebuildComponentTable,
-    RenderComponentTable, SkillBehaviorTable,
+    ActivitiesTable, ActivityTextTable, BehaviorParameterTable, BehaviorTemplateTable,
+    ComponentsRegistryTable, DeletionRestrictionsTable, DestructibleComponentTable, IconsTable,
+    ItemSetSkillsTable, ItemSetsTable, LootTableTable, MissionTasksTable, MissionsTable,
+    ObjectSkillsTable, ObjectsTable, RebuildComponentTable, RenderComponentTable,
+    SkillBehaviorTable,
 };
 
 use self::ext::{Components, Mission, MissionTask};
@@ -37,9 +38,11 @@ use self::ext::{Components, Mission, MissionTask};
 /// some metadata. Examples for this metadata are:
 ///
 /// - Mapping from a well-known column name (e.g. `MissionID`) to the "real" column index within the FDB
-pub trait TypedTable<'de> {
+pub trait TypedTable<'de>: Sized {
     /// The type representing one well-known column
     type Column: Copy + Clone + Eq;
+    /// The literal name of the table
+    const NAME: &'static str;
 
     /// Return the contained "raw" table
     fn as_raw(&self) -> Table<'de>;
@@ -47,6 +50,12 @@ pub trait TypedTable<'de> {
     ///
     /// This function constructs the necessary metadata.
     fn new(inner: Table<'de>) -> Self;
+
+    /// Get an instance from a database
+    fn of(tables: Tables<'de>) -> Option<Result<Self, CastError>> {
+        let table = tables.by_name(Self::NAME)?;
+        Some(table.map(Self::new))
+    }
 }
 
 /// ## A "typed" database row
@@ -121,6 +130,12 @@ where
 #[derive(Clone)]
 /// A selection of relevant database tables
 pub struct TypedDatabase<'db> {
+    /// Activities
+    pub activities: ActivitiesTable<'db>,
+    /// ActivityText
+    pub activity_text: ActivityTextTable<'db>,
+    /// DeletionRestrictions
+    pub deletion_restrictions: DeletionRestrictionsTable<'db>,
     /// BehaviorParameter
     pub behavior_parameters: BehaviorParameterTable<'db>,
     /// BehaviorTemplate
@@ -160,37 +175,25 @@ fn is_not_empty(s: &&Latin1Str) -> bool {
 impl<'a> TypedDatabase<'a> {
     /// Construct a new typed database
     pub fn new(tables: Tables<'a>) -> Result<Self, CastError> {
-        let behavior_parameter_inner = tables.by_name("BehaviorParameter").unwrap()?;
-        let behavior_template_inner = tables.by_name("BehaviorTemplate").unwrap()?;
-        let components_registry_inner = tables.by_name("ComponentsRegistry").unwrap()?;
-        let destructible_component_inner = tables.by_name("DestructibleComponent").unwrap()?;
-        let icons_inner = tables.by_name("Icons").unwrap()?;
-        let item_sets_inner = tables.by_name("ItemSets").unwrap()?;
-        let item_set_skills_inner = tables.by_name("ItemSetSkills").unwrap()?;
-        let loot_table_inner = tables.by_name("LootTable").unwrap()?;
-        let missions_inner = tables.by_name("Missions").unwrap()?;
-        let mission_tasks_inner = tables.by_name("MissionTasks").unwrap()?;
-        let objects_inner = tables.by_name("Objects").unwrap()?;
-        let object_skills_inner = tables.by_name("ObjectSkills").unwrap()?;
-        let rebuild_component_inner = tables.by_name("RebuildComponent").unwrap()?;
-        let render_component_inner = tables.by_name("RenderComponent").unwrap()?;
-        let skill_behavior_inner = tables.by_name("SkillBehavior").unwrap()?;
         Ok(TypedDatabase {
-            behavior_parameters: BehaviorParameterTable::new(behavior_parameter_inner),
-            behavior_templates: BehaviorTemplateTable::new(behavior_template_inner),
-            comp_reg: ComponentsRegistryTable::new(components_registry_inner),
-            destructible_component: DestructibleComponentTable::new(destructible_component_inner),
-            icons: IconsTable::new(icons_inner),
-            item_sets: ItemSetsTable::new(item_sets_inner),
-            item_set_skills: ItemSetSkillsTable::new(item_set_skills_inner),
-            loot_table: LootTableTable::new(loot_table_inner),
-            missions: MissionsTable::new(missions_inner),
-            mission_tasks: MissionTasksTable::new(mission_tasks_inner),
-            objects: ObjectsTable::new(objects_inner),
-            object_skills: ObjectSkillsTable::new(object_skills_inner),
-            rebuild_component: RebuildComponentTable::new(rebuild_component_inner),
-            render_comp: RenderComponentTable::new(render_component_inner),
-            skills: SkillBehaviorTable::new(skill_behavior_inner),
+            activities: ActivitiesTable::of(tables).unwrap()?,
+            activity_text: ActivityTextTable::of(tables).unwrap()?,
+            behavior_parameters: BehaviorParameterTable::of(tables).unwrap()?,
+            behavior_templates: BehaviorTemplateTable::of(tables).unwrap()?,
+            comp_reg: ComponentsRegistryTable::of(tables).unwrap()?,
+            deletion_restrictions: DeletionRestrictionsTable::of(tables).unwrap()?,
+            destructible_component: DestructibleComponentTable::of(tables).unwrap()?,
+            icons: IconsTable::of(tables).unwrap()?,
+            item_sets: ItemSetsTable::of(tables).unwrap()?,
+            item_set_skills: ItemSetSkillsTable::of(tables).unwrap()?,
+            loot_table: LootTableTable::of(tables).unwrap()?,
+            missions: MissionsTable::of(tables).unwrap()?,
+            mission_tasks: MissionTasksTable::of(tables).unwrap()?,
+            objects: ObjectsTable::of(tables).unwrap()?,
+            object_skills: ObjectSkillsTable::of(tables).unwrap()?,
+            rebuild_component: RebuildComponentTable::of(tables).unwrap()?,
+            render_comp: RenderComponentTable::of(tables).unwrap()?,
+            skills: SkillBehaviorTable::of(tables).unwrap()?,
         })
     }
 

@@ -51,6 +51,7 @@ fn run() -> Result<(), io::Error> {
 
     for (name, tspec) in &spec.tables {
         let t = name.to_camel_case();
+        let strname = Literal::string(name);
         let tname = format_ident!("{}Table", t);
         let rname = format_ident!("{}Row", t);
         let csname = format_ident!("{}Column", t);
@@ -148,6 +149,7 @@ fn run() -> Result<(), io::Error> {
 
             impl<'a> TypedTable<'a> for #tname<'a> {
                 type Column = super::columns::#csname;
+                const NAME: &'static str = #strname;
                 fn as_raw(&self) -> Table<'a> {
                     self.inner
                 }
