@@ -22,13 +22,15 @@ pub mod ext;
 use columns::{IconsColumn, MissionTasksColumn, MissionsColumn};
 use tables::{
     ActivitiesTable, ActivityTextTable, BehaviorParameterTable, BehaviorTemplateTable,
-    ComponentsRegistryTable, DeletionRestrictionsTable, DestructibleComponentTable, EmotesTable,
-    IconsTable, ItemSetSkillsTable, ItemSetsTable, LootMatrixTable, LootTableTable,
-    MissionEmailTable, MissionNpcComponentTable, MissionTasksTable, MissionTextTable,
-    MissionsTable, ObjectSkillsTable, ObjectsTable, PlayerStatisticsTable, PreconditionsTable,
-    PropertyTemplateTable, RebuildComponentTable, RenderComponentTable, RewardCodesTable,
-    SkillBehaviorTable, SpeedchatMenuTable, UgBehaviorSoundsTable, WhatsCoolItemSpotlightTable,
-    WhatsCoolNewsAndTipsTable, ZoneLoadingTipsTable, ZoneTableTable,
+    ComponentsRegistryTable, CurrencyDenominationsTable, DeletionRestrictionsTable,
+    DestructibleComponentTable, EmotesTable, IconsTable, InventoryComponentTable,
+    ItemComponentTable, ItemSetSkillsTable, ItemSetsTable, JetPackPadComponentTable,
+    LootMatrixTable, LootTableTable, MissionEmailTable, MissionNpcComponentTable,
+    MissionTasksTable, MissionTextTable, MissionsTable, NpcIconsTable, ObjectSkillsTable,
+    ObjectsTable, PlayerStatisticsTable, PreconditionsTable, PropertyTemplateTable,
+    RebuildComponentTable, RebuildSectionsTable, RenderComponentTable, RewardCodesTable,
+    SkillBehaviorTable, SpeedchatMenuTable, TamingBuildPuzzlesTable, UgBehaviorSoundsTable,
+    WhatsCoolItemSpotlightTable, WhatsCoolNewsAndTipsTable, ZoneLoadingTipsTable, ZoneTableTable,
 };
 
 use self::ext::{Components, Mission, MissionTask};
@@ -135,24 +137,32 @@ pub struct TypedDatabase<'db> {
     pub activities: ActivitiesTable<'db>,
     /// ActivityText
     pub activity_text: ActivityTextTable<'db>,
-    /// DeletionRestrictions
-    pub deletion_restrictions: DeletionRestrictionsTable<'db>,
     /// BehaviorParameter
     pub behavior_parameters: BehaviorParameterTable<'db>,
     /// BehaviorTemplate
     pub behavior_templates: BehaviorTemplateTable<'db>,
     /// ComponentRegistry
     pub comp_reg: ComponentsRegistryTable<'db>,
+    /// CurrencyDenominations
+    pub currency_denominations: CurrencyDenominationsTable<'db>,
+    /// DeletionRestrictions
+    pub deletion_restrictions: DeletionRestrictionsTable<'db>,
     /// DestructibleComponent
     pub destructible_component: DestructibleComponentTable<'db>,
     /// Emotes
     pub emotes: EmotesTable<'db>,
     /// Icons
     pub icons: IconsTable<'db>,
+    /// InventoryComponent
+    pub inventory_component: InventoryComponentTable<'db>,
+    /// ItemComponent
+    pub item_component: ItemComponentTable<'db>,
     /// ItemSets
     pub item_sets: ItemSetsTable<'db>,
     /// ItemSetSkills
     pub item_set_skills: ItemSetSkillsTable<'db>,
+    /// JetPackPadComponent
+    pub jet_pack_pad_component: JetPackPadComponentTable<'db>,
     /// LootTable
     pub loot_table: LootTableTable<'db>,
     /// LootMatrix
@@ -167,6 +177,8 @@ pub struct TypedDatabase<'db> {
     pub mission_text: MissionTextTable<'db>,
     /// Missions
     pub missions: MissionsTable<'db>,
+    /// NpcIcons
+    pub npc_icons: NpcIconsTable<'db>,
     /// Objects
     pub objects: ObjectsTable<'db>,
     /// Objects
@@ -179,6 +191,8 @@ pub struct TypedDatabase<'db> {
     pub property_template: PropertyTemplateTable<'db>,
     /// RebuildComponent
     pub rebuild_component: RebuildComponentTable<'db>,
+    /// RebuildSections
+    pub rebuild_sections: RebuildSectionsTable<'db>,
     /// RewardCodes
     pub reward_codes: RewardCodesTable<'db>,
     /// RenderComponent
@@ -187,6 +201,8 @@ pub struct TypedDatabase<'db> {
     pub skills: SkillBehaviorTable<'db>,
     /// SpeedchatMenu
     pub speedchat_menu: SpeedchatMenuTable<'db>,
+    /// TamingBuildPuzzles
+    pub taming_build_puzzles: TamingBuildPuzzlesTable<'db>,
     /// UGBehaviorSounds
     pub ug_behavior_sounds: UgBehaviorSoundsTable<'db>,
     /// WhatsCoolItemSpotlight
@@ -212,12 +228,16 @@ impl<'a> TypedDatabase<'a> {
             behavior_parameters: BehaviorParameterTable::of(tables).unwrap()?,
             behavior_templates: BehaviorTemplateTable::of(tables).unwrap()?,
             comp_reg: ComponentsRegistryTable::of(tables).unwrap()?,
+            currency_denominations: CurrencyDenominationsTable::of(tables).unwrap()?,
             deletion_restrictions: DeletionRestrictionsTable::of(tables).unwrap()?,
             destructible_component: DestructibleComponentTable::of(tables).unwrap()?,
             emotes: EmotesTable::of(tables).unwrap()?,
             icons: IconsTable::of(tables).unwrap()?,
+            inventory_component: InventoryComponentTable::of(tables).unwrap()?,
+            item_component: ItemComponentTable::of(tables).unwrap()?,
             item_sets: ItemSetsTable::of(tables).unwrap()?,
             item_set_skills: ItemSetSkillsTable::of(tables).unwrap()?,
+            jet_pack_pad_component: JetPackPadComponentTable::of(tables).unwrap()?,
             loot_matrix: LootMatrixTable::of(tables).unwrap()?,
             loot_table: LootTableTable::of(tables).unwrap()?,
             mission_email: MissionEmailTable::of(tables).unwrap()?,
@@ -225,6 +245,7 @@ impl<'a> TypedDatabase<'a> {
             mission_tasks: MissionTasksTable::of(tables).unwrap()?,
             mission_text: MissionTextTable::of(tables).unwrap()?,
             missions: MissionsTable::of(tables).unwrap()?,
+            npc_icons: NpcIconsTable::of(tables).unwrap()?,
             objects: ObjectsTable::of(tables).unwrap()?,
             object_skills: ObjectSkillsTable::of(tables).unwrap()?,
             player_statistics: PlayerStatisticsTable::of(tables).unwrap()?,
@@ -232,9 +253,11 @@ impl<'a> TypedDatabase<'a> {
             property_template: PropertyTemplateTable::of(tables).unwrap()?,
             reward_codes: RewardCodesTable::of(tables).unwrap()?,
             rebuild_component: RebuildComponentTable::of(tables).unwrap()?,
+            rebuild_sections: RebuildSectionsTable::of(tables).unwrap()?,
             render_comp: RenderComponentTable::of(tables).unwrap()?,
             skills: SkillBehaviorTable::of(tables).unwrap()?,
             speedchat_menu: SpeedchatMenuTable::of(tables).unwrap()?,
+            taming_build_puzzles: TamingBuildPuzzlesTable::of(tables).unwrap()?,
             ug_behavior_sounds: UgBehaviorSoundsTable::of(tables).unwrap()?,
             whats_cool_item_spotlight: WhatsCoolItemSpotlightTable::of(tables).unwrap()?,
             whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable::of(tables).unwrap()?,
