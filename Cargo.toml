@@ -3,13 +3,14 @@ name = "paradox-typed-db"
 version = "0.1.0"
 edition = "2018"
 
+[dependencies]
+latin1str = "0.1.1"
+
 [dependencies.assembly-core]
-git = "https://github.com/Xiphoseer/assembly_rs.git"
-rev = "258fc31e2c50713912f54717871f2915617b7db4"
+version = "0.3.1"
 
 [dependencies.assembly-fdb]
-git = "https://github.com/Xiphoseer/assembly_rs.git"
-rev = "258fc31e2c50713912f54717871f2915617b7db4"
+version = "0.1.0"
 default-features = false
 features = ["serde-derives"]
 

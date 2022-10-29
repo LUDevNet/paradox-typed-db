@@ -1,6 +1,7 @@
 //! # Extensions to the auto-generated queries
 
-use assembly_fdb::common::{Latin1Str, Value};
+use assembly_fdb::mem::Field;
+use latin1str::Latin1Str;
 
 use crate::{
     columns::{ItemSetsColumn, SkillBehaviorColumn},
@@ -51,7 +52,7 @@ impl<'db> ItemSetsTable<'db> {
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 let kit_type = row
                     .field_at(col_kit_type)
                     .unwrap()
@@ -152,7 +153,7 @@ impl<'db> SkillBehaviorTable<'db> {
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 let skill_icon = row.field_at(col_skill_icon).unwrap().into_opt_integer();
 
                 return Some(SkillBehavior { skill_icon });

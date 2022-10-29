@@ -11,9 +11,10 @@
 
 use assembly_core::buffer::CastError;
 use assembly_fdb::{
-    common::{Latin1Str, Value},
-    mem::{Row, Table, Tables},
+    mem::{Field, Row, Table, Tables},
+    value::Value,
 };
+use latin1str::Latin1Str;
 
 include!(concat!(env!("OUT_DIR"), "/generated.rs"));
 
@@ -279,7 +280,7 @@ impl<'a> TypedDatabase<'a> {
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 return row.field_at(col_icon_path).unwrap().into_opt_text();
             }
         }
@@ -303,7 +304,7 @@ impl<'a> TypedDatabase<'a> {
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 let mission_icon_id = row
                     .field_at(col_mission_icon_id)
                     .unwrap()
@@ -341,7 +342,7 @@ impl<'a> TypedDatabase<'a> {
         for row in bucket.row_iter() {
             let id_field = row.field_at(0).unwrap();
 
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 let icon_id = row.field_at(col_icon_id).unwrap().into_opt_integer();
                 let uid = row.field_at(col_uid).unwrap().into_opt_integer().unwrap();
 
@@ -363,7 +364,7 @@ impl<'a> TypedDatabase<'a> {
         for row in bucket.row_iter() {
             let mut fields = row.field_iter();
             let id_field = fields.next().unwrap();
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 let name = fields.next().unwrap(); // 1: name
                 let description = fields.nth(2).unwrap(); // 4: description
                 let display_name = fields.nth(2).unwrap(); // 7: displayName
@@ -418,11 +419,11 @@ impl<'a> TypedDatabase<'a> {
         for row in bucket.row_iter() {
             let mut fields = row.field_iter();
             let id_field = fields.next().unwrap();
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 let _render_asset = fields.next().unwrap();
                 let icon_asset = fields.next().unwrap();
 
-                if let Value::Text(url) = icon_asset {
+                if let Field::Text(url) = icon_asset {
                     return Some(url);
                 }
             }
@@ -443,7 +444,7 @@ impl<'a> TypedDatabase<'a> {
         for row in bucket.row_iter() {
             let mut fields = row.field_iter();
             let id_field = fields.next().unwrap();
-            if id_field == Value::Integer(id) {
+            if id_field == Field::Integer(id) {
                 let component_type = fields.next().unwrap();
                 let component_id = fields.next().unwrap();
 

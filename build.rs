@@ -242,7 +242,8 @@ fn run() -> Result<(), io::Error> {
     };
 
     let rows = quote! {
-        use assembly_fdb::{common::Latin1Str, mem::{Field, Row}};
+        use latin1str::Latin1Str;
+        use assembly_fdb::mem::{Field, Row};
         use serde::ser::SerializeStruct;
 
         #(#rows)*
