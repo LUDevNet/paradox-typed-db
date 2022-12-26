@@ -23,15 +23,16 @@ pub mod ext;
 use columns::{IconsColumn, MissionTasksColumn, MissionsColumn};
 use tables::{
     ActivitiesTable, ActivityTextTable, BehaviorParameterTable, BehaviorTemplateTable,
-    ComponentsRegistryTable, CurrencyDenominationsTable, DeletionRestrictionsTable,
-    DestructibleComponentTable, EmotesTable, IconsTable, InventoryComponentTable,
-    ItemComponentTable, ItemSetSkillsTable, ItemSetsTable, JetPackPadComponentTable,
-    LootMatrixTable, LootTableTable, MissionEmailTable, MissionNpcComponentTable,
-    MissionTasksTable, MissionTextTable, MissionsTable, NpcIconsTable, ObjectSkillsTable,
-    ObjectsTable, PlayerStatisticsTable, PreconditionsTable, PropertyTemplateTable,
-    RebuildComponentTable, RebuildSectionsTable, RenderComponentTable, RewardCodesTable,
-    SkillBehaviorTable, SpeedchatMenuTable, TamingBuildPuzzlesTable, UgBehaviorSoundsTable,
-    WhatsCoolItemSpotlightTable, WhatsCoolNewsAndTipsTable, ZoneLoadingTipsTable, ZoneTableTable,
+    CollectibleComponentTable, ComponentsRegistryTable, CurrencyDenominationsTable,
+    DeletionRestrictionsTable, DestructibleComponentTable, EmotesTable, IconsTable,
+    InventoryComponentTable, ItemComponentTable, ItemSetSkillsTable, ItemSetsTable,
+    JetPackPadComponentTable, LootMatrixTable, LootTableTable, MissionEmailTable,
+    MissionNpcComponentTable, MissionTasksTable, MissionTextTable, MissionsTable, NpcIconsTable,
+    ObjectSkillsTable, ObjectsTable, PlayerStatisticsTable, PreconditionsTable,
+    PropertyTemplateTable, RebuildComponentTable, RebuildSectionsTable, RenderComponentTable,
+    RewardCodesTable, RewardsTable, SkillBehaviorTable, SpeedchatMenuTable,
+    TamingBuildPuzzlesTable, UgBehaviorSoundsTable, WhatsCoolItemSpotlightTable,
+    WhatsCoolNewsAndTipsTable, ZoneLoadingTipsTable, ZoneTableTable,
 };
 
 use self::ext::{Components, Mission, MissionTask};
@@ -142,6 +143,8 @@ pub struct TypedDatabase<'db> {
     pub behavior_parameters: BehaviorParameterTable<'db>,
     /// BehaviorTemplate
     pub behavior_templates: BehaviorTemplateTable<'db>,
+    /// CollectibleComponent
+    pub collectible_component: CollectibleComponentTable<'db>,
     /// ComponentRegistry
     pub comp_reg: ComponentsRegistryTable<'db>,
     /// CurrencyDenominations
@@ -194,6 +197,8 @@ pub struct TypedDatabase<'db> {
     pub rebuild_component: RebuildComponentTable<'db>,
     /// RebuildSections
     pub rebuild_sections: Option<RebuildSectionsTable<'db>>,
+    /// Rewards
+    pub rewards: RewardsTable<'db>,
     /// RewardCodes
     pub reward_codes: RewardCodesTable<'db>,
     /// RenderComponent
@@ -228,6 +233,7 @@ impl<'a> TypedDatabase<'a> {
             activity_text: ActivityTextTable::of(tables).unwrap()?,
             behavior_parameters: BehaviorParameterTable::of(tables).unwrap()?,
             behavior_templates: BehaviorTemplateTable::of(tables).unwrap()?,
+            collectible_component: CollectibleComponentTable::of(tables).unwrap()?,
             comp_reg: ComponentsRegistryTable::of(tables).unwrap()?,
             currency_denominations: CurrencyDenominationsTable::of(tables).unwrap()?,
             deletion_restrictions: DeletionRestrictionsTable::of(tables).unwrap()?,
@@ -252,6 +258,7 @@ impl<'a> TypedDatabase<'a> {
             player_statistics: PlayerStatisticsTable::of(tables).unwrap()?,
             preconditions: PreconditionsTable::of(tables).unwrap()?,
             property_template: PropertyTemplateTable::of(tables).unwrap()?,
+            rewards: RewardsTable::of(tables).unwrap()?,
             reward_codes: RewardCodesTable::of(tables).unwrap()?,
             rebuild_component: RebuildComponentTable::of(tables).unwrap()?,
             rebuild_sections: RebuildSectionsTable::of(tables).transpose()?,
