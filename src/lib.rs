@@ -193,7 +193,7 @@ pub struct TypedDatabase<'db> {
     /// RebuildComponent
     pub rebuild_component: RebuildComponentTable<'db>,
     /// RebuildSections
-    pub rebuild_sections: RebuildSectionsTable<'db>,
+    pub rebuild_sections: Option<RebuildSectionsTable<'db>>,
     /// RewardCodes
     pub reward_codes: RewardCodesTable<'db>,
     /// RenderComponent
@@ -254,7 +254,7 @@ impl<'a> TypedDatabase<'a> {
             property_template: PropertyTemplateTable::of(tables).unwrap()?,
             reward_codes: RewardCodesTable::of(tables).unwrap()?,
             rebuild_component: RebuildComponentTable::of(tables).unwrap()?,
-            rebuild_sections: RebuildSectionsTable::of(tables).unwrap()?,
+            rebuild_sections: RebuildSectionsTable::of(tables).transpose()?,
             render_comp: RenderComponentTable::of(tables).unwrap()?,
             skills: SkillBehaviorTable::of(tables).unwrap()?,
             speedchat_menu: SpeedchatMenuTable::of(tables).unwrap()?,
