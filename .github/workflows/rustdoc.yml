@@ -30,16 +30,9 @@ jobs:
       #- name: Setup Pages
       #  uses: actions/configure-pages@v2
       - name: Install stable toolchain
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+        uses: dtolnay/rust-toolchain@stable
       - name: Run cargo doc
-        uses: actions-rs/cargo@v1
-        with:
-          command: doc
-          args: --no-deps
+        run: cargo doc --no-deps
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
