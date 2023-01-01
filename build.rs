@@ -70,8 +70,8 @@ fn run() -> Result<(), io::Error> {
 
         for cspec in &tspec.columns {
             let cn = &cspec.name;
-            let c = cspec.name.to_snake_case();
-            let cf = cspec.name.to_camel_case();
+            let c = cn.to_snake_case();
+            let cf = cn.to_camel_case();
             let c = match c.as_str() {
                 "type" => String::from("r#type"),
                 "static" => String::from("r#static"),
@@ -79,7 +79,7 @@ fn run() -> Result<(), io::Error> {
             };
             let cname = format_ident!("{}", c);
             let cfname = format_ident!("{}", cf);
-            let doc = format!("Index of column `{}`", &cspec.name);
+            let doc = format!("Index of column `{}`", &cn);
             cslist.push(quote! {
                 #[doc = #doc]
                 #cfname
@@ -101,11 +101,12 @@ fn run() -> Result<(), io::Error> {
             };
 
             let columns = quote!(super::columns::#csname);
+            let err = Literal::string(&format!("Missing column {} in {}", cn, t));
             let f = if cspec.nullable {
                 quote! {
                     #[doc = #doc]
                     pub fn #cname(&self) -> Option<#return_type> {
-                        let index = self.table.get_col(#columns::#cfname).unwrap();
+                        let index = self.table.get_col(#columns::#cfname).expect(#err);
                         self.row.field_at(index).and_then(#map_fn)
                     }
                 }
@@ -119,8 +120,8 @@ fn run() -> Result<(), io::Error> {
                 quote! {
                     #[doc = #doc]
                     pub fn #cname(&self) #ret {
-                        let index = self.table.get_col(#columns::#cfname).unwrap();
-                        self.row.field_at(index)#map.unwrap()
+                        let index = self.table.get_col(#columns::#cfname).expect(#err);
+                        self.row.field_at(index)#map.expect("defined field missing, FDB corrupt")
                     }
                 }
             };
@@ -298,10 +299,12 @@ fn run() -> Result<(), io::Error> {
         }
     }
 
-    if let Ok(path) = std::env::var("GITHUB_OUTPUT") {
-        let mut file = std::fs::OpenOptions::new().append(true).open(path)?;
-        writeln!(file, "crate_version={}", env!("CARGO_PKG_VERSION"))?;
-        writeln!(file, "crate_name={}", env!("CARGO_PKG_NAME"))?;
+    if option_env!("CARGO_PRIMARY_PACKAGE").is_some() {
+        if let Ok(path) = std::env::var("GITHUB_OUTPUT") {
+            let mut file = std::fs::OpenOptions::new().append(true).open(path)?;
+            writeln!(file, "crate_version={}", env!("CARGO_PKG_VERSION"))?;
+            writeln!(file, "crate_name={}", env!("CARGO_PKG_NAME"))?;
+        }
     }
 
     Ok(())
