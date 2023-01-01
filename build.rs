@@ -1,4 +1,10 @@
-use std::{collections::BTreeMap, env, io, path::Path, process::Command};
+use std::{
+    collections::BTreeMap,
+    env,
+    io::{self, Write},
+    path::Path,
+    process::Command,
+};
 
 use heck::{CamelCase, SnakeCase};
 use proc_macro2::Literal;
@@ -290,6 +296,12 @@ fn run() -> Result<(), io::Error> {
         Err(e) => {
             println!("cargo:warning=rustfmt: {}", e);
         }
+    }
+
+    if let Ok(path) = std::env::var("GITHUB_OUTPUT") {
+        let mut file = std::fs::OpenOptions::new().append(true).open(path)?;
+        writeln!(file, "crate_version={}", env!("CARGO_PKG_VERSION"))?;
+        writeln!(file, "crate_name={}", env!("CARGO_PKG_NAME"))?;
     }
 
     Ok(())

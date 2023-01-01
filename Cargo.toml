@@ -2,6 +2,10 @@
 name = "paradox-typed-db"
 version = "0.1.0"
 edition = "2018"
+license = "MIT or Apache-2.0"
+description = "Typed Bindings for CDClient.fdb"
+repository = "https://github.com/LUDevNet/paradox-typed-db"
+documentation = "https://lu-dev.net/paradox-typed-db/paradox_typed_db"
 
 [dependencies]
 latin1str = "0.1.1"
