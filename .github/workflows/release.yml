@@ -1,0 +1,43 @@
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+name: Release Build
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [linux, windows]
+        include:
+          - platform: windows
+            os: windows
+            binext: .exe
+          - platform: linux
+            os: ubuntu
+            binext: ""
+    name: Build [${{ matrix.platform }}]
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v3
+
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+
+      - name: Run cargo build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: paradox-server-${{ matrix.platform }}
+          path: target/release/paradox-server${{ matrix.binext }}
