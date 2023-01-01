@@ -172,7 +172,7 @@ pub struct TypedDatabase<'db> {
     /// LootMatrix
     pub loot_matrix: LootMatrixTable<'db>,
     /// MissionEmail
-    pub mission_email: MissionEmailTable<'db>,
+    pub mission_email: Option<MissionEmailTable<'db>>,
     /// MissionNPCComponent
     pub mission_npc_component: MissionNpcComponentTable<'db>,
     /// MissionTasks
@@ -247,7 +247,7 @@ impl<'a> TypedDatabase<'a> {
             jet_pack_pad_component: JetPackPadComponentTable::of(tables).transpose()?,
             loot_matrix: LootMatrixTable::of(tables).unwrap()?,
             loot_table: LootTableTable::of(tables).unwrap()?,
-            mission_email: MissionEmailTable::of(tables).unwrap()?,
+            mission_email: MissionEmailTable::of(tables).transpose()?,
             mission_npc_component: MissionNpcComponentTable::of(tables).unwrap()?,
             mission_tasks: MissionTasksTable::of(tables).unwrap()?,
             mission_text: MissionTextTable::of(tables).unwrap()?,
