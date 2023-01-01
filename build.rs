@@ -106,8 +106,12 @@ fn run() -> Result<(), io::Error> {
                 quote! {
                     #[doc = #doc]
                     pub fn #cname(&self) -> Option<#return_type> {
-                        let index = self.table.get_col(#columns::#cfname).expect(#err);
-                        self.row.field_at(index).and_then(#map_fn)
+                        if let Some(index) = self.table.get_col(#columns::#cfname) {
+                            self.row.field_at(index).and_then(#map_fn)
+                        } else {
+                            ::log::warn!(#err);
+                            None
+                        }
                     }
                 }
             } else {

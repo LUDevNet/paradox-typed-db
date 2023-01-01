@@ -9,6 +9,7 @@ documentation = "https://lu-dev.net/paradox-typed-db/paradox_typed_db"
 
 [dependencies]
 latin1str = "0.1.1"
+log = "0.4.17"
 
 [dependencies.assembly-core]
 version = "0.3.1"
