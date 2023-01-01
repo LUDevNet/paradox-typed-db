@@ -172,9 +172,9 @@ pub struct TypedDatabase<'db> {
     /// LootMatrix
     pub loot_matrix: LootMatrixTable<'db>,
     /// MissionEmail
-    pub mission_email: MissionEmailTable<'db>,
+    pub mission_email: Option<MissionEmailTable<'db>>,
     /// MissionNPCComponent
-    pub mission_npc_component: MissionNpcComponentTable<'db>,
+    pub mission_npc_component: Option<MissionNpcComponentTable<'db>>,
     /// MissionTasks
     pub mission_tasks: MissionTasksTable<'db>,
     /// MissionText
@@ -198,9 +198,9 @@ pub struct TypedDatabase<'db> {
     /// RebuildSections
     pub rebuild_sections: Option<RebuildSectionsTable<'db>>,
     /// Rewards
-    pub rewards: RewardsTable<'db>,
+    pub rewards: Option<RewardsTable<'db>>,
     /// RewardCodes
-    pub reward_codes: RewardCodesTable<'db>,
+    pub reward_codes: Option<RewardCodesTable<'db>>,
     /// RenderComponent
     pub render_comp: RenderComponentTable<'db>,
     /// SkillBehavior
@@ -210,13 +210,13 @@ pub struct TypedDatabase<'db> {
     /// TamingBuildPuzzles
     pub taming_build_puzzles: TamingBuildPuzzlesTable<'db>,
     /// UGBehaviorSounds
-    pub ug_behavior_sounds: UgBehaviorSoundsTable<'db>,
+    pub ug_behavior_sounds: Option<UgBehaviorSoundsTable<'db>>,
     /// WhatsCoolItemSpotlight
-    pub whats_cool_item_spotlight: WhatsCoolItemSpotlightTable<'db>,
+    pub whats_cool_item_spotlight: Option<WhatsCoolItemSpotlightTable<'db>>,
     /// WhatsCoolNewsAndTips
-    pub whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable<'db>,
+    pub whats_cool_news_and_tips: Option<WhatsCoolNewsAndTipsTable<'db>>,
     /// ZoneLoadingTips
-    pub zone_loading_tips: ZoneLoadingTipsTable<'db>,
+    pub zone_loading_tips: Option<ZoneLoadingTipsTable<'db>>,
     /// ZoneTable
     pub zone_table: ZoneTableTable<'db>,
 }
@@ -247,8 +247,8 @@ impl<'a> TypedDatabase<'a> {
             jet_pack_pad_component: JetPackPadComponentTable::of(tables).transpose()?,
             loot_matrix: LootMatrixTable::of(tables).unwrap()?,
             loot_table: LootTableTable::of(tables).unwrap()?,
-            mission_email: MissionEmailTable::of(tables).unwrap()?,
-            mission_npc_component: MissionNpcComponentTable::of(tables).unwrap()?,
+            mission_email: MissionEmailTable::of(tables).transpose()?,
+            mission_npc_component: MissionNpcComponentTable::of(tables).transpose()?,
             mission_tasks: MissionTasksTable::of(tables).unwrap()?,
             mission_text: MissionTextTable::of(tables).unwrap()?,
             missions: MissionsTable::of(tables).unwrap()?,
@@ -258,18 +258,18 @@ impl<'a> TypedDatabase<'a> {
             player_statistics: PlayerStatisticsTable::of(tables).unwrap()?,
             preconditions: PreconditionsTable::of(tables).unwrap()?,
             property_template: PropertyTemplateTable::of(tables).unwrap()?,
-            rewards: RewardsTable::of(tables).unwrap()?,
-            reward_codes: RewardCodesTable::of(tables).unwrap()?,
+            rewards: RewardsTable::of(tables).transpose()?,
+            reward_codes: RewardCodesTable::of(tables).transpose()?,
             rebuild_component: RebuildComponentTable::of(tables).unwrap()?,
             rebuild_sections: RebuildSectionsTable::of(tables).transpose()?,
             render_comp: RenderComponentTable::of(tables).unwrap()?,
             skills: SkillBehaviorTable::of(tables).unwrap()?,
             speedchat_menu: SpeedchatMenuTable::of(tables).unwrap()?,
             taming_build_puzzles: TamingBuildPuzzlesTable::of(tables).unwrap()?,
-            ug_behavior_sounds: UgBehaviorSoundsTable::of(tables).unwrap()?,
-            whats_cool_item_spotlight: WhatsCoolItemSpotlightTable::of(tables).unwrap()?,
-            whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable::of(tables).unwrap()?,
-            zone_loading_tips: ZoneLoadingTipsTable::of(tables).unwrap()?,
+            ug_behavior_sounds: UgBehaviorSoundsTable::of(tables).transpose()?,
+            whats_cool_item_spotlight: WhatsCoolItemSpotlightTable::of(tables).transpose()?,
+            whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable::of(tables).transpose()?,
+            zone_loading_tips: ZoneLoadingTipsTable::of(tables).transpose()?,
             zone_table: ZoneTableTable::of(tables).unwrap()?,
         })
     }
