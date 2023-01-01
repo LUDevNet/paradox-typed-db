@@ -166,7 +166,7 @@ pub struct TypedDatabase<'db> {
     /// ItemSetSkills
     pub item_set_skills: ItemSetSkillsTable<'db>,
     /// JetPackPadComponent
-    pub jet_pack_pad_component: JetPackPadComponentTable<'db>,
+    pub jet_pack_pad_component: Option<JetPackPadComponentTable<'db>>,
     /// LootTable
     pub loot_table: LootTableTable<'db>,
     /// LootMatrix
