@@ -244,7 +244,7 @@ impl<'a> TypedDatabase<'a> {
             item_component: ItemComponentTable::of(tables).unwrap()?,
             item_sets: ItemSetsTable::of(tables).unwrap()?,
             item_set_skills: ItemSetSkillsTable::of(tables).unwrap()?,
-            jet_pack_pad_component: JetPackPadComponentTable::of(tables).unwrap()?,
+            jet_pack_pad_component: JetPackPadComponentTable::of(tables).transpose()?,
             loot_matrix: LootMatrixTable::of(tables).unwrap()?,
             loot_table: LootTableTable::of(tables).unwrap()?,
             mission_email: MissionEmailTable::of(tables).unwrap()?,
