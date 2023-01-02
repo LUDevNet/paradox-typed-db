@@ -202,7 +202,7 @@ pub struct TypedDatabase<'db> {
     /// Objects
     pub object_skills: ObjectSkillsTable<'db>,
     /// PlayerStatistics
-    pub player_statistics: PlayerStatisticsTable<'db>,
+    pub player_statistics: Option<PlayerStatisticsTable<'db>>,
     /// Preconditions
     pub preconditions: PreconditionsTable<'db>,
     /// PropertyTemplate
@@ -269,7 +269,7 @@ impl<'a> TypedDatabase<'a> {
             npc_icons: NpcIconsTable::of(tables).unwrap()?,
             objects: ObjectsTable::of(tables).unwrap()?,
             object_skills: ObjectSkillsTable::of(tables).unwrap()?,
-            player_statistics: PlayerStatisticsTable::of(tables).unwrap()?,
+            player_statistics: PlayerStatisticsTable::of(tables).transpose()?,
             preconditions: PreconditionsTable::of(tables).unwrap()?,
             property_template: PropertyTemplateTable::of(tables).unwrap()?,
             rewards: RewardsTable::of(tables).transpose()?,
