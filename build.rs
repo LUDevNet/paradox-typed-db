@@ -64,8 +64,10 @@ fn run() -> Result<(), io::Error> {
 
         let ccount = tspec.columns.len();
         let mut cslist = Vec::with_capacity(ccount);
+        let mut col_to_string_list = Vec::with_capacity(ccount);
+        let mut col_serialize_list = Vec::with_capacity(ccount);
         let mut exlist = Vec::with_capacity(ccount);
-        let mut ser_stmts = Vec::with_capacity(ccount);
+        //let mut ser_stmts = Vec::with_capacity(ccount);
         let mut cmatch = Vec::with_capacity(ccount);
 
         for cspec in &tspec.columns {
@@ -84,10 +86,12 @@ fn run() -> Result<(), io::Error> {
                 #[doc = #doc]
                 #cfname
             });
-
-            ser_stmts.push(quote! {
-                s.serialize_field(#cn, &self.#cname())?;
+            col_to_string_list.push(quote! {
+                Self::#cfname => #cn
             });
+            /*ser_stmts.push(quote! {
+                s.serialize_field(#cn, &self.#cname())?;
+            });*/
 
             let doc = format!("Get the data in column `{}`", &cspec.name);
             let (return_type, map_fn) = match &cspec.ty {
@@ -99,6 +103,10 @@ fn run() -> Result<(), io::Error> {
                 ValueType::BigInt => (quote!(i64), quote!(Field::into_opt_big_int)),
                 ValueType::VarChar => (quote!(&'a Latin1Str), quote!(Field::into_opt_varchar)),
             };
+
+            col_serialize_list.push(quote! {
+                Self::#cfname => s.serialize_field(#cn, &((#map_fn)(value)))
+            });
 
             let columns = quote!(super::columns::#csname);
             let err = Literal::string(&format!("Missing column {} in {}", cn, t));
@@ -139,10 +147,24 @@ fn run() -> Result<(), io::Error> {
 
         let doc = format!("Columns in table `{}`\n\nSee also: [`{0}.html>", &name,);
         cspecs.push(quote! {
-            #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+            #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
             #[doc = #doc]
             pub enum #csname {
                 #(#cslist),*
+            }
+
+            impl crate::TypedColumn for #csname {
+                fn to_static_str(&self) -> &'static str {
+                    match self {
+                        #(#col_to_string_list),*
+                    }
+                }
+
+                fn serialize_struct_field<S: ::serde::ser::SerializeStruct>(&self, s: &mut S, value: Field) -> Result<(), S::Error> {
+                    match self {
+                        #(#col_serialize_list),*
+                    }
+                }
             }
         });
 
@@ -155,7 +177,7 @@ fn run() -> Result<(), io::Error> {
             #[derive(Clone)]
             pub struct #tname<'a> {
                 inner: Table<'a>,
-                pub(crate) col: HashMap<super::columns::#csname, usize>,
+                pub(crate) col: BTreeMap<super::columns::#csname, usize>,
             }
 
             impl<'a> TypedTable<'a> for #tname<'a> {
@@ -166,7 +188,7 @@ fn run() -> Result<(), io::Error> {
                 }
 
                 fn new(inner: Table<'a>) -> Self {
-                    let mut col = HashMap::new();
+                    let mut col = BTreeMap::new();
                     for (i, c) in inner.column_iter().enumerate() {
                     	let key = match c.name_raw().as_bytes() {
                     		#(#cmatch),*,
@@ -233,7 +255,10 @@ fn run() -> Result<(), io::Error> {
                 where
                     S: serde::Serializer {
                     let mut s = serializer.serialize_struct(#name, #ccount)?;
-                    #(#ser_stmts)*
+                    for (col, index) in &self.table.col {
+                        col.serialize_struct_field(&mut s, self.row.field_at(*index).unwrap_or_else(|| panic!("Missing known column {:?} in {}", col, #t)))?;
+                    }
+                    //#(#ser_stmts)*
                     s.end()
                 }
             }
@@ -241,12 +266,13 @@ fn run() -> Result<(), io::Error> {
     }
 
     let columns = quote! {
+        use ::assembly_fdb::mem::Field;
         #(#cspecs)*
     };
 
     let tables = quote! {
         use assembly_fdb::mem::{Table, Field};
-        use std::collections::HashMap;
+        use std::collections::BTreeMap;
         use crate::{TypedTable, TypedRow};
 
         #(#tables)*
@@ -256,6 +282,7 @@ fn run() -> Result<(), io::Error> {
         use latin1str::Latin1Str;
         use assembly_fdb::mem::{Field, Row};
         use serde::ser::SerializeStruct;
+        use crate::TypedColumn;
 
         #(#rows)*
     };

@@ -9,6 +9,8 @@
 //! - Enable serialization with the [`serde`](https://serde.rs) crate
 //! - Accept FDBs that may have additional columns and tables
 
+use std::fmt;
+
 use assembly_core::buffer::CastError;
 use assembly_fdb::{
     mem::{Field, Row, Table, Tables},
@@ -45,7 +47,7 @@ use self::ext::{Components, Mission, MissionTask};
 /// - Mapping from a well-known column name (e.g. `MissionID`) to the "real" column index within the FDB
 pub trait TypedTable<'de>: Sized {
     /// The type representing one well-known column
-    type Column: Copy + Clone + Eq;
+    type Column: TypedColumn;
     /// The literal name of the table
     const NAME: &'static str;
 
@@ -95,6 +97,18 @@ where
         }
         None
     }
+}
+
+/// # A column type for a table
+pub trait TypedColumn: fmt::Debug + Copy + Clone + Eq {
+    /// Return the original name of the column
+    fn to_static_str(&self) -> &'static str;
+    /// Serialize a field to a struct
+    fn serialize_struct_field<S: ::serde::ser::SerializeStruct>(
+        &self,
+        s: &mut S,
+        value: Field,
+    ) -> Result<(), S::Error>;
 }
 
 /// # Iterator over [`TypedRow`]s
