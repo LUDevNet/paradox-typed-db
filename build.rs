@@ -305,7 +305,7 @@ fn run() -> Result<(), io::Error> {
         use serde::ser::SerializeStruct;
         use crate::TypedColumn;
 
-        const EMPTY_L1_STR: &'static Latin1Str = unsafe { Latin1Str::from_bytes_unchecked(&[]) };
+        const EMPTY_L1_STR: &Latin1Str = unsafe { Latin1Str::from_bytes_unchecked(&[]) };
         #field_into_nothing_impl
 
         #(#rows)*
