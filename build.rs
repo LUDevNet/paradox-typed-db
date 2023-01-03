@@ -28,7 +28,7 @@ pub struct ColumnSpec {
     nullable: bool,
 }
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Copy, Clone, PartialEq, Eq)]
 pub enum ValueType {
     /// The NULL value
     Nothing,
@@ -126,16 +126,27 @@ fn run() -> Result<(), io::Error> {
                 }
             } else {
                 // Fix some clippy lints
-                let (map, ret) = if matches!(cspec.ty, ValueType::Nothing) {
-                    (quote!(.map(|_| ())), quote!())
+                let ret = if cspec.ty == ValueType::Nothing {
+                    quote!()
                 } else {
-                    (quote!(.and_then(#map_fn)), quote!( -> #return_type))
+                    quote!( -> #return_type)
+                };
+                // FIXME: impl Default for &Latin1Str upstream
+                let default = if matches!(cspec.ty, ValueType::Text | ValueType::VarChar) {
+                    quote!(EMPTY_L1_STR)
+                } else {
+                    quote!(Default::default())
                 };
                 quote! {
                     #[doc = #doc]
                     pub fn #cname(&self) #ret {
                         let index = self.table.get_col(#columns::#cfname).expect(#err);
-                        self.row.field_at(index)#map.expect("defined field missing, FDB corrupt")
+                        let value = self.row.field_at(index).expect("defined field missing, FDB corrupt");
+                        #map_fn(value).unwrap_or_else(|| {
+                            let pk = self.row.field_at(0).unwrap_or(Field::Nothing);
+                            log::warn!("Missing non-nullable field {} in {} in row {:?}", #cn, #t, pk);
+                            #default
+                        })
                     }
                 }
             };
@@ -267,12 +278,15 @@ fn run() -> Result<(), io::Error> {
         });
     }
 
-    let columns = quote! {
-        use ::assembly_fdb::mem::Field;
-
+    let field_into_nothing_impl = quote! {
         fn #field_into_nothing(_: Field) -> Option<()> {
             Some(())
         }
+    };
+
+    let columns = quote! {
+        use ::assembly_fdb::mem::Field;
+        #field_into_nothing_impl
 
         #(#cspecs)*
     };
@@ -290,6 +304,9 @@ fn run() -> Result<(), io::Error> {
         use assembly_fdb::mem::{Field, Row};
         use serde::ser::SerializeStruct;
         use crate::TypedColumn;
+
+        const EMPTY_L1_STR: &'static Latin1Str = unsafe { Latin1Str::from_bytes_unchecked(&[]) };
+        #field_into_nothing_impl
 
         #(#rows)*
     };

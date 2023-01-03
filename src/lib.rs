@@ -245,19 +245,29 @@ impl<'a> TypedDatabase<'a> {
         Ok(TypedDatabase {
             activities: ActivitiesTable::of(tables).expect("Missing Table 'Activities'")?,
             activity_text: ActivityTextTable::of(tables).expect("Missing Table 'ActivityText'")?,
-            behavior_parameters: BehaviorParameterTable::of(tables).expect("Missing Table 'BehaviorParameter'")?,
-            behavior_templates: BehaviorTemplateTable::of(tables).expect("Missing Table 'BehaviorTemplate'")?,
-            collectible_component: CollectibleComponentTable::of(tables).expect("Missing Table 'CollectibleComponent'")?,
-            comp_reg: ComponentsRegistryTable::of(tables).expect("Missing Table 'ComponentsRegistry'")?,
-            currency_denominations: CurrencyDenominationsTable::of(tables).expect("Missing Table 'CurrencyDenominations'")?,
-            deletion_restrictions: DeletionRestrictionsTable::of(tables).expect("Missing Table 'DeletionRestrictions'")?,
-            destructible_component: DestructibleComponentTable::of(tables).expect("Missing Table 'DestructibleComponent'")?,
+            behavior_parameters: BehaviorParameterTable::of(tables)
+                .expect("Missing Table 'BehaviorParameter'")?,
+            behavior_templates: BehaviorTemplateTable::of(tables)
+                .expect("Missing Table 'BehaviorTemplate'")?,
+            collectible_component: CollectibleComponentTable::of(tables)
+                .expect("Missing Table 'CollectibleComponent'")?,
+            comp_reg: ComponentsRegistryTable::of(tables)
+                .expect("Missing Table 'ComponentsRegistry'")?,
+            currency_denominations: CurrencyDenominationsTable::of(tables)
+                .expect("Missing Table 'CurrencyDenominations'")?,
+            deletion_restrictions: DeletionRestrictionsTable::of(tables)
+                .expect("Missing Table 'DeletionRestrictions'")?,
+            destructible_component: DestructibleComponentTable::of(tables)
+                .expect("Missing Table 'DestructibleComponent'")?,
             emotes: EmotesTable::of(tables).expect("Missing Table 'Emotes'")?,
             icons: IconsTable::of(tables).expect("Missing Table 'Icons'")?,
-            inventory_component: InventoryComponentTable::of(tables).expect("Missing Table 'InventoryComponent'")?,
-            item_component: ItemComponentTable::of(tables).expect("Missing Table 'ItemComponent'")?,
+            inventory_component: InventoryComponentTable::of(tables)
+                .expect("Missing Table 'InventoryComponent'")?,
+            item_component: ItemComponentTable::of(tables)
+                .expect("Missing Table 'ItemComponent'")?,
             item_sets: ItemSetsTable::of(tables).expect("Missing Table 'ItemSets'")?,
-            item_set_skills: ItemSetSkillsTable::of(tables).expect("Missing Table 'ItemSetSkills'")?,
+            item_set_skills: ItemSetSkillsTable::of(tables)
+                .expect("Missing Table 'ItemSetSkills'")?,
             jet_pack_pad_component: JetPackPadComponentTable::of(tables).transpose()?,
             loot_matrix: LootMatrixTable::of(tables).expect("Missing Table 'LootMatrix'")?,
             loot_table: LootTableTable::of(tables).expect("Missing Table 'LootTable'")?,
@@ -270,16 +280,22 @@ impl<'a> TypedDatabase<'a> {
             objects: ObjectsTable::of(tables).expect("Missing Table 'Objects'")?,
             object_skills: ObjectSkillsTable::of(tables).expect("Missing Table 'ObjectSkills'")?,
             player_statistics: PlayerStatisticsTable::of(tables).transpose()?,
-            preconditions: PreconditionsTable::of(tables).expect("Missing Table 'Preconditions'")?,
-            property_template: PropertyTemplateTable::of(tables).expect("Missing Table 'PropertyTemplate'")?,
+            preconditions: PreconditionsTable::of(tables)
+                .expect("Missing Table 'Preconditions'")?,
+            property_template: PropertyTemplateTable::of(tables)
+                .expect("Missing Table 'PropertyTemplate'")?,
             rewards: RewardsTable::of(tables).transpose()?,
             reward_codes: RewardCodesTable::of(tables).transpose()?,
-            rebuild_component: RebuildComponentTable::of(tables).expect("Missing Table 'RebuildComponent'")?,
+            rebuild_component: RebuildComponentTable::of(tables)
+                .expect("Missing Table 'RebuildComponent'")?,
             rebuild_sections: RebuildSectionsTable::of(tables).transpose()?,
-            render_comp: RenderComponentTable::of(tables).expect("Missing Table 'RenderComponent'")?,
+            render_comp: RenderComponentTable::of(tables)
+                .expect("Missing Table 'RenderComponent'")?,
             skills: SkillBehaviorTable::of(tables).expect("Missing Table 'SkillBehavior'")?,
-            speedchat_menu: SpeedchatMenuTable::of(tables).expect("Missing Table 'SpeedchatMenu'")?,
-            taming_build_puzzles: TamingBuildPuzzlesTable::of(tables).expect("Missing Table 'TamingBuildPuzzles'")?,
+            speedchat_menu: SpeedchatMenuTable::of(tables)
+                .expect("Missing Table 'SpeedchatMenu'")?,
+            taming_build_puzzles: TamingBuildPuzzlesTable::of(tables)
+                .expect("Missing Table 'TamingBuildPuzzles'")?,
             ug_behavior_sounds: UgBehaviorSoundsTable::of(tables).transpose()?,
             whats_cool_item_spotlight: WhatsCoolItemSpotlightTable::of(tables).transpose()?,
             whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable::of(tables).transpose()?,
