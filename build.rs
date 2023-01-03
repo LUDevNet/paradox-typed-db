@@ -55,6 +55,8 @@ fn run() -> Result<(), io::Error> {
     let mut tables = Vec::with_capacity(spec.tables.len());
     let mut rows = Vec::with_capacity(spec.tables.len());
 
+    let field_into_nothing = quote!(field_into_nothing);
+
     for (name, tspec) in &spec.tables {
         let t = name.to_camel_case();
         let strname = Literal::string(name);
@@ -95,7 +97,7 @@ fn run() -> Result<(), io::Error> {
 
             let doc = format!("Get the data in column `{}`", &cspec.name);
             let (return_type, map_fn) = match &cspec.ty {
-                ValueType::Nothing => (quote!(()), quote!(|_| Some(()))),
+                ValueType::Nothing => (quote!(()), field_into_nothing.clone()),
                 ValueType::Integer => (quote!(i32), quote!(Field::into_opt_integer)),
                 ValueType::Float => (quote!(f32), quote!(Field::into_opt_float)),
                 ValueType::Text => (quote!(&'a Latin1Str), quote!(Field::into_opt_text)),
@@ -267,6 +269,11 @@ fn run() -> Result<(), io::Error> {
 
     let columns = quote! {
         use ::assembly_fdb::mem::Field;
+
+        fn #field_into_nothing(_: Field) -> Option<()> {
+            Some(())
+        }
+
         #(#cspecs)*
     };
 
