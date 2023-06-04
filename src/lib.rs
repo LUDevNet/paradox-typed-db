@@ -24,17 +24,18 @@ pub mod ext;
 
 use columns::{IconsColumn, MissionTasksColumn, MissionsColumn};
 use tables::{
-    ActivitiesTable, ActivityTextTable, BehaviorParameterTable, BehaviorTemplateTable,
-    CollectibleComponentTable, ComponentsRegistryTable, CurrencyDenominationsTable,
-    DeletionRestrictionsTable, DestructibleComponentTable, EmotesTable, IconsTable,
-    InventoryComponentTable, ItemComponentTable, ItemSetSkillsTable, ItemSetsTable,
+    ActivitiesTable, ActivityRewardsTable, ActivityTextTable, BehaviorParameterTable,
+    BehaviorTemplateTable, CollectibleComponentTable, ComponentsRegistryTable,
+    CurrencyDenominationsTable, DeletionRestrictionsTable, DestructibleComponentTable, EmotesTable,
+    IconsTable, InventoryComponentTable, ItemComponentTable, ItemSetSkillsTable, ItemSetsTable,
     JetPackPadComponentTable, LootMatrixTable, LootTableTable, MissionEmailTable,
     MissionNpcComponentTable, MissionTasksTable, MissionTextTable, MissionsTable, NpcIconsTable,
-    ObjectSkillsTable, ObjectsTable, PlayerStatisticsTable, PreconditionsTable,
-    PropertyTemplateTable, RebuildComponentTable, RebuildSectionsTable, RenderComponentTable,
-    RewardCodesTable, RewardsTable, SkillBehaviorTable, SpeedchatMenuTable,
-    TamingBuildPuzzlesTable, UgBehaviorSoundsTable, WhatsCoolItemSpotlightTable,
-    WhatsCoolNewsAndTipsTable, ZoneLoadingTipsTable, ZoneTableTable,
+    ObjectSkillsTable, ObjectsTable, PackageComponentTable, PlayerStatisticsTable,
+    PreconditionsTable, PropertyTemplateTable, RebuildComponentTable, RebuildSectionsTable,
+    RenderComponentTable, RewardCodesTable, RewardsTable, SkillBehaviorTable,
+    SmashableComponentTable, SpeedchatMenuTable, TamingBuildPuzzlesTable, UgBehaviorSoundsTable,
+    VendorComponentTable, WhatsCoolItemSpotlightTable, WhatsCoolNewsAndTipsTable,
+    ZoneLoadingTipsTable, ZoneTableTable,
 };
 
 use self::ext::{Components, Mission, MissionTask};
@@ -153,6 +154,8 @@ pub struct TypedDatabase<'db> {
     pub activities: ActivitiesTable<'db>,
     /// ActivityText
     pub activity_text: ActivityTextTable<'db>,
+    /// ActivityRewards
+    pub activity_rewards: Option<ActivityRewardsTable<'db>>,
     /// BehaviorParameter
     pub behavior_parameters: BehaviorParameterTable<'db>,
     /// BehaviorTemplate
@@ -201,6 +204,8 @@ pub struct TypedDatabase<'db> {
     pub objects: ObjectsTable<'db>,
     /// Objects
     pub object_skills: ObjectSkillsTable<'db>,
+    /// PackageComponent
+    pub package_component: Option<PackageComponentTable<'db>>,
     /// PlayerStatistics
     pub player_statistics: Option<PlayerStatisticsTable<'db>>,
     /// Preconditions
@@ -219,12 +224,16 @@ pub struct TypedDatabase<'db> {
     pub render_comp: RenderComponentTable<'db>,
     /// SkillBehavior
     pub skills: SkillBehaviorTable<'db>,
+    /// SmashableComponent
+    pub smashable_component: Option<SmashableComponentTable<'db>>,
     /// SpeedchatMenu
     pub speedchat_menu: SpeedchatMenuTable<'db>,
     /// TamingBuildPuzzles
     pub taming_build_puzzles: TamingBuildPuzzlesTable<'db>,
     /// UGBehaviorSounds
     pub ug_behavior_sounds: Option<UgBehaviorSoundsTable<'db>>,
+    /// VendorComponent
+    pub vendor_component: Option<VendorComponentTable<'db>>,
     /// WhatsCoolItemSpotlight
     pub whats_cool_item_spotlight: Option<WhatsCoolItemSpotlightTable<'db>>,
     /// WhatsCoolNewsAndTips
@@ -245,6 +254,7 @@ impl<'a> TypedDatabase<'a> {
         Ok(TypedDatabase {
             activities: ActivitiesTable::of(tables).expect("Missing Table 'Activities'")?,
             activity_text: ActivityTextTable::of(tables).expect("Missing Table 'ActivityText'")?,
+            activity_rewards: ActivityRewardsTable::of(tables).transpose()?,
             behavior_parameters: BehaviorParameterTable::of(tables)
                 .expect("Missing Table 'BehaviorParameter'")?,
             behavior_templates: BehaviorTemplateTable::of(tables)
@@ -279,6 +289,7 @@ impl<'a> TypedDatabase<'a> {
             npc_icons: NpcIconsTable::of(tables).expect("Missing Table 'NpcIcons'")?,
             objects: ObjectsTable::of(tables).expect("Missing Table 'Objects'")?,
             object_skills: ObjectSkillsTable::of(tables).expect("Missing Table 'ObjectSkills'")?,
+            package_component: PackageComponentTable::of(tables).transpose()?,
             player_statistics: PlayerStatisticsTable::of(tables).transpose()?,
             preconditions: PreconditionsTable::of(tables)
                 .expect("Missing Table 'Preconditions'")?,
@@ -292,11 +303,13 @@ impl<'a> TypedDatabase<'a> {
             render_comp: RenderComponentTable::of(tables)
                 .expect("Missing Table 'RenderComponent'")?,
             skills: SkillBehaviorTable::of(tables).expect("Missing Table 'SkillBehavior'")?,
+            smashable_component: SmashableComponentTable::of(tables).transpose()?,
             speedchat_menu: SpeedchatMenuTable::of(tables)
                 .expect("Missing Table 'SpeedchatMenu'")?,
             taming_build_puzzles: TamingBuildPuzzlesTable::of(tables)
                 .expect("Missing Table 'TamingBuildPuzzles'")?,
             ug_behavior_sounds: UgBehaviorSoundsTable::of(tables).transpose()?,
+            vendor_component: VendorComponentTable::of(tables).transpose()?,
             whats_cool_item_spotlight: WhatsCoolItemSpotlightTable::of(tables).transpose()?,
             whats_cool_news_and_tips: WhatsCoolNewsAndTipsTable::of(tables).transpose()?,
             zone_loading_tips: ZoneLoadingTipsTable::of(tables).transpose()?,
